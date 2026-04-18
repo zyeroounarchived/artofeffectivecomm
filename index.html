@@ -520,13 +520,40 @@
         const guardCore = new THREE.Mesh(new THREE.BoxGeometry(1.05, 0.1, 0.18), guardMat);
         guardCore.position.y = -0.98;
 
+        const guardHub = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.22, 0.26), pommelMat);
+        guardHub.position.y = -0.98;
+
+        const guardBand = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.03, 0.12), pommelMat);
+        guardBand.position.y = -0.905;
+
+        const guardBraceLeft = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.03, 0.04), sigilMat);
+        guardBraceLeft.position.set(-0.18, -0.93, 0.12);
+        guardBraceLeft.rotation.z = 0.34;
+
+        const guardBraceRight = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.03, 0.04), sigilMat);
+        guardBraceRight.position.set(0.18, -0.93, 0.12);
+        guardBraceRight.rotation.z = -0.34;
+
         const guardLeft = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.07, 0.14), guardMat);
         guardLeft.position.set(-0.62, -0.94, 0);
         guardLeft.rotation.z = 0.35;
 
+        const guardLeftCap = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.12, 0.14), pommelMat);
+        guardLeftCap.position.set(-0.78, -0.89, 0);
+        guardLeftCap.rotation.z = 0.18;
+
         const guardRight = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.07, 0.14), guardMat);
         guardRight.position.set(0.62, -0.94, 0);
         guardRight.rotation.z = -0.35;
+
+        const guardRightCap = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.12, 0.14), pommelMat);
+        guardRightCap.position.set(0.78, -0.89, 0);
+        guardRightCap.rotation.z = -0.18;
+
+        const guardNodeLeft = new THREE.Mesh(new THREE.SphereGeometry(0.035, 12, 12), sigilMat);
+        guardNodeLeft.position.set(-0.43, -0.99, 0.14);
+        const guardNodeRight = new THREE.Mesh(new THREE.SphereGeometry(0.035, 12, 12), sigilMat);
+        guardNodeRight.position.set(0.43, -0.99, 0.14);
 
         const ricasso = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.18, 0.075), bladeMat);
         ricasso.position.y = -0.84;
@@ -586,8 +613,16 @@
             tip,
             ricasso,
             guardCore,
+            guardHub,
+            guardBand,
+            guardBraceLeft,
+            guardBraceRight,
             guardLeft,
+            guardLeftCap,
             guardRight,
+            guardRightCap,
+            guardNodeLeft,
+            guardNodeRight,
             grip,
             pommel,
             pommelCrossV,
@@ -646,8 +681,8 @@
                 Math.random() * 2 - 1
             ).normalize();
             // Inverse scaling: smaller radius -> faster spin, larger radius -> slower spin.
-            const sizeFactor = 3.1 / cfg.radius;
-            ring.userData.spinSpeed = (0.0018 + Math.random() * 0.0014) * sizeFactor;
+            const sizeFactor = 2.2 / cfg.radius;
+            ring.userData.spinSpeed = (0.0008 + Math.random() * 0.0008) * sizeFactor;
             structure.add(ring);
             rings.push(ring);
         });
