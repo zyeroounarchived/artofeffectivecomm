@@ -494,60 +494,60 @@
     function createMedievalSword() {
         const swordGroup = new THREE.Group();
 
-        const bladeMat = new THREE.MeshStandardMaterial({ color: 0xdbe2eb, metalness: 0.92, roughness: 0.2 });
-        const fullerMat = new THREE.MeshStandardMaterial({ color: 0xaeb7c4, metalness: 0.85, roughness: 0.28 });
-        const guardMat = new THREE.MeshStandardMaterial({ color: 0xcbd3de, metalness: 0.9, roughness: 0.24 });
-        const gripMat = new THREE.MeshStandardMaterial({ color: 0xb7c0cd, metalness: 0.88, roughness: 0.3 });
-        const pommelMat = new THREE.MeshStandardMaterial({ color: 0xc4ccd8, metalness: 0.9, roughness: 0.26 });
+        const bladeMat = new THREE.MeshStandardMaterial({ color: 0xdce3ed, metalness: 0.93, roughness: 0.2 });
+        const fullerMat = new THREE.MeshStandardMaterial({ color: 0xb8c2cf, metalness: 0.88, roughness: 0.26 });
+        const guardMat = new THREE.MeshStandardMaterial({ color: 0xc6cfdb, metalness: 0.9, roughness: 0.24 });
+        const gripMat = new THREE.MeshStandardMaterial({ color: 0xbfc8d4, metalness: 0.9, roughness: 0.28 });
+        const pommelMat = new THREE.MeshStandardMaterial({ color: 0xc9d2de, metalness: 0.91, roughness: 0.24 });
 
-        const blade = new THREE.Mesh(new THREE.BoxGeometry(0.18, 4.6, 0.055), bladeMat);
-        blade.position.y = 1.32;
+        const blade = new THREE.Mesh(new THREE.BoxGeometry(0.18, 5.4, 0.055), bladeMat);
+        blade.position.y = 1.72;
 
-        const fuller = new THREE.Mesh(new THREE.BoxGeometry(0.045, 3.3, 0.013), fullerMat);
-        fuller.position.set(0, 1.32, 0.03);
+        const fuller = new THREE.Mesh(new THREE.BoxGeometry(0.045, 4.0, 0.013), fullerMat);
+        fuller.position.set(0, 1.72, 0.03);
 
-        const tip = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.56, 4), bladeMat);
-        tip.position.y = 3.9;
+        const tip = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.62, 4), bladeMat);
+        tip.position.y = 4.72;
         tip.rotation.y = Math.PI / 4;
 
-        const guardCore = new THREE.Mesh(new THREE.BoxGeometry(1.35, 0.11, 0.2), guardMat);
-        guardCore.position.y = -1.0;
+        const guardCore = new THREE.Mesh(new THREE.BoxGeometry(1.05, 0.1, 0.18), guardMat);
+        guardCore.position.y = -0.98;
 
-        const guardLeft = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.08, 0.16), guardMat);
-        guardLeft.position.set(-0.83, -0.95, 0);
+        const guardLeft = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.07, 0.14), guardMat);
+        guardLeft.position.set(-0.62, -0.94, 0);
         guardLeft.rotation.z = 0.35;
 
-        const guardRight = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.08, 0.16), guardMat);
-        guardRight.position.set(0.83, -0.95, 0);
+        const guardRight = new THREE.Mesh(new THREE.BoxGeometry(0.24, 0.07, 0.14), guardMat);
+        guardRight.position.set(0.62, -0.94, 0);
         guardRight.rotation.z = -0.35;
 
         const ricasso = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.18, 0.075), bladeMat);
         ricasso.position.y = -0.84;
 
-        const grip = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.1, 1.45, 18), gripMat);
-        grip.position.y = -1.85;
+        const grip = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.075, 1.2, 18), gripMat);
+        grip.position.y = -1.72;
 
-        const wrapCount = 7;
-        const wrapStep = 0.2;
+        const wrapCount = 6;
+        const wrapStep = 0.17;
         for (let i = 0; i < wrapCount; i++) {
-            const wrap = new THREE.Mesh(new THREE.TorusGeometry(0.102, 0.01, 8, 20), guardMat);
+            const wrap = new THREE.Mesh(new THREE.TorusGeometry(0.079, 0.008, 8, 20), guardMat);
             wrap.rotation.x = Math.PI / 2;
-            wrap.position.y = -1.25 - i * wrapStep;
+            wrap.position.y = -1.3 - i * wrapStep;
             swordGroup.add(wrap);
         }
 
-        const pommel = new THREE.Mesh(new THREE.OctahedronGeometry(0.17, 0), pommelMat);
-        pommel.position.y = -2.68;
+        const pommel = new THREE.Mesh(new THREE.OctahedronGeometry(0.135, 0), pommelMat);
+        pommel.position.y = -2.43;
 
-        const pommelCrossV = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.22, 0.03), guardMat);
-        pommelCrossV.position.set(0, -2.68, 0.18);
-        const pommelCrossH = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.03, 0.03), guardMat);
-        pommelCrossH.position.set(0, -2.68, 0.18);
+        const pommelCrossV = new THREE.Mesh(new THREE.BoxGeometry(0.022, 0.16, 0.022), guardMat);
+        pommelCrossV.position.set(0, -2.43, 0.145);
+        const pommelCrossH = new THREE.Mesh(new THREE.BoxGeometry(0.125, 0.022, 0.022), guardMat);
+        pommelCrossH.position.set(0, -2.43, 0.145);
 
-        const hiltCrossV = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.22, 0.03), guardMat);
-        hiltCrossV.position.set(0, -0.98, 0.15);
-        const hiltCrossH = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.03, 0.03), guardMat);
-        hiltCrossH.position.set(0, -0.98, 0.15);
+        const hiltCrossV = new THREE.Mesh(new THREE.BoxGeometry(0.022, 0.16, 0.022), guardMat);
+        hiltCrossV.position.set(0, -0.95, 0.135);
+        const hiltCrossH = new THREE.Mesh(new THREE.BoxGeometry(0.11, 0.022, 0.022), guardMat);
+        hiltCrossH.position.set(0, -0.95, 0.135);
 
         swordGroup.add(
             blade,
