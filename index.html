@@ -71,6 +71,10 @@
         .slide.active { opacity: 1; visibility: visible; transform: translateY(0); }
         .slide.prev { transform: translateY(-40px); opacity: 0; }
 
+        .slide:not(#slide-0):not(#slide-14) {
+            font-size: 1.08rem;
+        }
+
         #bg-canvas {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 0; pointer-events: none; display: block;
@@ -501,6 +505,7 @@
         const guardMat = new THREE.MeshStandardMaterial({ color: 0xc6cfdb, metalness: 0.9, roughness: 0.24 });
         const gripMat = new THREE.MeshStandardMaterial({ color: 0xbfc8d4, metalness: 0.9, roughness: 0.28 });
         const pommelMat = new THREE.MeshStandardMaterial({ color: 0xc9d2de, metalness: 0.91, roughness: 0.24 });
+        const sigilMat = new THREE.MeshStandardMaterial({ color: 0xf2f5fa, metalness: 0.96, roughness: 0.16 });
 
         const blade = new THREE.Mesh(new THREE.BoxGeometry(0.18, 5.4, 0.055), bladeMat);
         blade.position.y = 1.72;
@@ -551,6 +556,30 @@
         const hiltCrossH = new THREE.Mesh(new THREE.BoxGeometry(0.11, 0.022, 0.022), guardMat);
         hiltCrossH.position.set(0, -0.95, 0.135);
 
+        const sigilPlate = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.42, 0.025), sigilMat);
+        sigilPlate.position.set(0, -1.14, 0.095);
+
+        const sigilCrossV = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.24, 0.02), sigilMat);
+        sigilCrossV.position.set(0, -1.14, 0.125);
+        const sigilCrossH = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.02, 0.02), sigilMat);
+        sigilCrossH.position.set(0, -1.14, 0.125);
+
+        const sigilDiagL = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.02, 0.02), sigilMat);
+        sigilDiagL.position.set(-0.055, -1.08, 0.125);
+        sigilDiagL.rotation.z = 0.78;
+        const sigilDiagR = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.02, 0.02), sigilMat);
+        sigilDiagR.position.set(0.055, -1.08, 0.125);
+        sigilDiagR.rotation.z = -0.78;
+
+        const sigilNodeA = new THREE.Mesh(new THREE.SphereGeometry(0.022, 10, 10), sigilMat);
+        sigilNodeA.position.set(-0.12, -1.23, 0.14);
+        const sigilNodeB = new THREE.Mesh(new THREE.SphereGeometry(0.022, 10, 10), sigilMat);
+        sigilNodeB.position.set(0.12, -1.23, 0.14);
+        const sigilNodeC = new THREE.Mesh(new THREE.SphereGeometry(0.022, 10, 10), sigilMat);
+        sigilNodeC.position.set(-0.12, -1.05, 0.14);
+        const sigilNodeD = new THREE.Mesh(new THREE.SphereGeometry(0.022, 10, 10), sigilMat);
+        sigilNodeD.position.set(0.12, -1.05, 0.14);
+
         swordGroup.add(
             blade,
             fuller,
@@ -564,7 +593,16 @@
             pommelCrossV,
             pommelCrossH,
             hiltCrossV,
-            hiltCrossH
+            hiltCrossH,
+            sigilPlate,
+            sigilCrossV,
+            sigilCrossH,
+            sigilDiagL,
+            sigilDiagR,
+            sigilNodeA,
+            sigilNodeB,
+            sigilNodeC,
+            sigilNodeD
         );
         swordGroup.position.set(0, 0, 0);
         swordGroup.rotation.z = 0.08;
@@ -607,7 +645,9 @@
                 Math.random() * 2 - 1,
                 Math.random() * 2 - 1
             ).normalize();
-            ring.userData.spinSpeed = 0.0025 + Math.random() * 0.0035;
+            // Inverse scaling: smaller radius -> faster spin, larger radius -> slower spin.
+            const sizeFactor = 3.1 / cfg.radius;
+            ring.userData.spinSpeed = (0.0018 + Math.random() * 0.0014) * sizeFactor;
             structure.add(ring);
             rings.push(ring);
         });
