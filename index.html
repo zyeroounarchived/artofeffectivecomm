@@ -490,6 +490,8 @@
     });
 
     let scene, camera, renderer, structure, sword;
+    const rings = [];
+    let swordKeyLight, swordRimLight;
 
     function createMedievalSword() {
         const swordGroup = new THREE.Group();
@@ -574,39 +576,61 @@
         const canvas = document.getElementById('bg-canvas');
         if (!canvas) return;
         scene = new THREE.Scene();
+        rings.length = 0;
         camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // SIMPLIFIED ARCHITECTURAL RINGS
+        // Independent rings with different sizes, opacity, and random spin axes.
         structure = new THREE.Group();
-        const mat = new THREE.MeshPhongMaterial({
-            color: 0xffffff,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.06
-        });
-        
-        for(let i=0; i<3; i++) {
-            const ring = new THREE.Mesh(new THREE.TorusGeometry(3 + i*0.5, 0.05, 16, 100), mat);
-            ring.rotation.x = Math.random() * Math.PI;
-            ring.rotation.y = Math.random() * Math.PI;
-            structure.add(ring);
-        }
+        const ringConfigs = [
+            { radius: 2.15, tube: 0.045, opacity: 0.16 },
+            { radius: 2.9, tube: 0.05, opacity: 0.11 },
+            { radius: 3.45, tube: 0.05, opacity: 0.09 },
+            { radius: 4.0, tube: 0.05, opacity: 0.08 }
+        ];
 
-        const innerRing = new THREE.Mesh(new THREE.TorusGeometry(1.85, 0.03, 16, 100), mat);
-        innerRing.rotation.x = Math.PI * 0.35;
-        innerRing.rotation.y = Math.PI * 0.2;
-        structure.add(innerRing);
+        ringConfigs.forEach((cfg) => {
+            const ringMat = new THREE.MeshPhongMaterial({
+                color: 0xeaf2ff,
+                wireframe: true,
+                transparent: true,
+                opacity: cfg.opacity
+            });
+            const ring = new THREE.Mesh(new THREE.TorusGeometry(cfg.radius, cfg.tube, 20, 140), ringMat);
+            ring.rotation.x = Math.random() * Math.PI * 2;
+            ring.rotation.y = Math.random() * Math.PI * 2;
+            ring.rotation.z = Math.random() * Math.PI * 2;
+            ring.userData.spinAxis = new THREE.Vector3(
+                Math.random() * 2 - 1,
+                Math.random() * 2 - 1,
+                Math.random() * 2 - 1
+            ).normalize();
+            ring.userData.spinSpeed = 0.0025 + Math.random() * 0.0035;
+            structure.add(ring);
+            rings.push(ring);
+        });
         structure.position.set(0, 0, 0);
 
         sword = createMedievalSword();
         
         scene.add(structure);
         scene.add(sword);
-        scene.add(new THREE.AmbientLight(0xffffff, 0.8));
-        const pl = new THREE.PointLight(0xffffff, 1.2); pl.position.set(10, 10, 10); scene.add(pl);
+        scene.add(new THREE.AmbientLight(0xffffff, 0.72));
+
+        const pl = new THREE.PointLight(0xffffff, 1.0);
+        pl.position.set(10, 10, 10);
+        scene.add(pl);
+
+        swordKeyLight = new THREE.PointLight(0xf1f6ff, 1.45, 14, 2);
+        swordKeyLight.position.set(1.8, 1.1, 3.4);
+        scene.add(swordKeyLight);
+
+        swordRimLight = new THREE.PointLight(0xd3deef, 0.8, 11, 2);
+        swordRimLight.position.set(-1.7, -0.8, -2.6);
+        scene.add(swordRimLight);
+
         camera.position.set(0, 0, 9);
         camera.lookAt(0, 0, 0);
         animate();
@@ -614,16 +638,16 @@
 
     function animate() {
         requestAnimationFrame(animate);
-        if (structure) {
-            structure.rotation.y += 0.001;
-            structure.children.forEach((c, idx) => {
-                c.rotation.x += 0.0005 * (idx + 1);
-                c.rotation.z += 0.0003 * (idx + 1);
+        if (rings.length) {
+            rings.forEach((ring) => {
+                ring.rotateOnAxis(ring.userData.spinAxis, ring.userData.spinSpeed);
             });
         }
         if (sword) {
-            sword.rotation.y += 0.01;
-            sword.rotation.x = Math.sin(performance.now() * 0.0008) * 0.08;
+            const t = performance.now();
+            sword.rotation.y += 0.004;
+            sword.rotation.x = Math.sin(t * 0.0008) * 0.07;
+            if (swordKeyLight) swordKeyLight.intensity = 1.35 + Math.sin(t * 0.0024) * 0.28;
         }
         renderer.render(scene, camera);
     }
