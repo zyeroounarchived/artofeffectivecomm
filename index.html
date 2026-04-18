@@ -489,7 +489,38 @@
         dock.appendChild(item);
     });
 
-    let scene, camera, renderer, structure;
+    let scene, camera, renderer, structure, sword;
+
+    function createMedievalSword() {
+        const swordGroup = new THREE.Group();
+
+        const bladeMat = new THREE.MeshStandardMaterial({ color: 0xd8dde6, metalness: 0.9, roughness: 0.22 });
+        const guardMat = new THREE.MeshStandardMaterial({ color: 0x9b6a2f, metalness: 0.8, roughness: 0.3 });
+        const gripMat = new THREE.MeshStandardMaterial({ color: 0x2b2a28, metalness: 0.1, roughness: 0.85 });
+        const pommelMat = new THREE.MeshStandardMaterial({ color: 0x7c8794, metalness: 0.75, roughness: 0.35 });
+
+        const blade = new THREE.Mesh(new THREE.BoxGeometry(0.16, 3.6, 0.05), bladeMat);
+        blade.position.y = 0.9;
+
+        const tip = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.4, 4), bladeMat);
+        tip.position.y = 2.9;
+        tip.rotation.y = Math.PI / 4;
+
+        const guard = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.12, 0.18), guardMat);
+        guard.position.y = -0.95;
+
+        const grip = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.09, 1.1, 14), gripMat);
+        grip.position.y = -1.6;
+
+        const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), pommelMat);
+        pommel.position.y = -2.25;
+
+        swordGroup.add(blade, tip, guard, grip, pommel);
+        swordGroup.position.set(0, 0, 0);
+        swordGroup.rotation.z = 0.08;
+
+        return swordGroup;
+    }
 
     function init3D() {
         const canvas = document.getElementById('bg-canvas');
@@ -516,8 +547,11 @@
             structure.add(ring);
         }
         structure.position.set(0, 0, 0);
+
+        sword = createMedievalSword();
         
         scene.add(structure);
+        scene.add(sword);
         scene.add(new THREE.AmbientLight(0xffffff, 0.8));
         const pl = new THREE.PointLight(0xffffff, 1.2); pl.position.set(10, 10, 10); scene.add(pl);
         camera.position.set(0, 0, 9);
@@ -533,6 +567,10 @@
                 c.rotation.x += 0.0005 * (idx + 1);
                 c.rotation.z += 0.0003 * (idx + 1);
             });
+        }
+        if (sword) {
+            sword.rotation.y += 0.01;
+            sword.rotation.x = Math.sin(performance.now() * 0.0008) * 0.08;
         }
         renderer.render(scene, camera);
     }
