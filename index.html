@@ -189,8 +189,8 @@
 
 <div id="video-modal">
     <div class="close-video" onclick="closeVideo()">CLOSE ×</div>
-    <video id="impact-vid" loop playsinline muted>
-        <source src="Snapinsta.app_video_AQPVjqmoFrWJTV6Q6rTO2Jgfffh8iQ3DcGNy2tTw85sILAaEqx9GtmmUM91tD1aLlJmdARgxIX3MdFopW3YVfVJW.mp4" type="video/mp4">
+    <video id="impact-vid" loop playsinline>
+        <source src="cats.mp4" type="video/mp4">
     </video>
 </div>
 
@@ -415,6 +415,10 @@
 
 <div class="dock-container" id="dock"></div>
 
+<audio id="bgm" loop preload="auto">
+    <source src="All_On_Top_Version_by_The_Girl_Next_Door_-_Talla26__128k_.mp3" type="audio/mpeg">
+</audio>
+
 <script>
     let isUnlocked = false;
     const apiKey = "";
@@ -582,16 +586,22 @@
         }
     }
 
-    function playImpact() {
-        const modal = document.getElementById('video-modal');
-        const vid = document.getElementById('impact-vid');
-        modal.style.display = 'flex';
-        vid.currentTime = 0;
-        const playPromise = vid.play();
-        if (playPromise !== undefined) { playPromise.catch(() => {}); }
-    }
+   function playImpact() {
+    const modal = document.getElementById('video-modal');
+    const vid = document.getElementById('impact-vid');
+    modal.style.display = 'flex';
+    vid.currentTime = 0;
+    vid.volume = 1;
+    fadeBgm(false); // fade out bgm while video plays
+    const playPromise = vid.play();
+    if (playPromise !== undefined) { playPromise.catch(() => {}); }
+}
 
-    function closeVideo() { document.getElementById('video-modal').style.display = 'none'; document.getElementById('impact-vid').pause(); }
+   function closeVideo() {
+    document.getElementById('video-modal').style.display = 'none';
+    document.getElementById('impact-vid').pause();
+    fadeBgm(true); // fade bgm back in
+}
 
     // Hard Cooldown on Scroll
     window.addEventListener('wheel', (e) => {
@@ -624,6 +634,34 @@
     });
 
     window.addEventListener('load', () => { init3D(); updateSlides(); });
+
+    const bgm = document.getElementById('bgm');
+    bgm.volume = 0;
+    const TARGET_VOLUME = 0.35;
+
+    function fadeBgm(fadeIn, duration = 1500) {
+        const start = bgm.volume;
+        const end = fadeIn ? TARGET_VOLUME : 0;
+        const startTime = performance.now();
+        function step(now) {
+            const t = Math.min((now - startTime) / duration, 1);
+            bgm.volume = start + (end - start) * t;
+            if (t < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+    }
+
+    // Start BGM on first user interaction (browser autoplay policy)
+    function startBgm() {
+        bgm.play().then(() => fadeBgm(true)).catch(() => {});
+        document.removeEventListener('click', startBgm);
+        document.removeEventListener('keydown', startBgm);
+        document.removeEventListener('touchstart', startBgm);
+    }
+
+    document.addEventListener('click', startBgm);
+    document.addEventListener('keydown', startBgm);
+    document.addEventListener('touchstart', startBgm);
 </script>
 </body>
 </html>
