@@ -515,11 +515,13 @@
             ring.rotation.y = Math.random() * Math.PI;
             structure.add(ring);
         }
+        structure.position.set(0, 0, 0);
         
         scene.add(structure);
         scene.add(new THREE.AmbientLight(0xffffff, 0.8));
         const pl = new THREE.PointLight(0xffffff, 1.2); pl.position.set(10, 10, 10); scene.add(pl);
-        camera.position.z = 9;
+        camera.position.set(0, 0, 9);
+        camera.lookAt(0, 0, 0);
         animate();
     }
 
@@ -649,6 +651,7 @@
 
     window.addEventListener('resize', () => {
         if (camera) { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); }
+        if (camera) camera.lookAt(0, 0, 0);
         if (renderer) renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
