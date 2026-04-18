@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Clear & Structured Documents - Final Masterclass</title>
+    <title>Clear & Structured Documents - Masterclass</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
             --card-bg: rgba(255, 255, 255, 0.45);
             --nav-bg: rgba(255, 255, 255, 0.9);
             --accent-gold: #c5a059;
-            --accent-glow: #71717a; /* Metallic Grey for Nabhya */
+            --accent-nabhya: #71717a; /* Metallic Grey for Nabhya */
             --accent-green: #10b981;
         }
 
@@ -60,7 +60,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            /* Extra top padding to ensure titles don't get cut by browser bar */
             padding: 8rem 2rem 10rem 2rem; 
             opacity: 0;
             visibility: hidden;
@@ -97,14 +96,14 @@
         }
 
         .dock-item {
-            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+            width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
             background: rgba(128, 128, 128, 0.1); border-radius: 10px; color: var(--text);
-            transition: all 0.25s cubic-bezier(0.2, 0, 0, 1); cursor: pointer; position: relative;
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1); cursor: pointer; position: relative;
             flex-shrink: 0;
         }
 
-        .dock-item.locked { opacity: 0.12; cursor: not-allowed; filter: grayscale(1); }
-        .dock-item:hover:not(.locked) { width: 44px; height: 44px; background: var(--text); color: var(--bg); margin: 0 4px; transform: translateY(-8px); }
+        .dock-item.locked { opacity: 0.1; cursor: not-allowed; filter: grayscale(1); }
+        .dock-item:not(.locked):hover { width: 48px; height: 48px; background: var(--text); color: var(--bg); margin: 0 4px; transform: translateY(-8px); }
         .dock-item.active { background: var(--text); color: var(--bg); transform: translateY(-12px) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
         .dock-label {
@@ -113,7 +112,7 @@
             font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px;
             white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.2s ease;
         }
-        .dock-item:hover:not(.locked) .dock-label { opacity: 1; transform: translateX(-50%) translateY(0px); }
+        .dock-item:not(.locked):hover .dock-label { opacity: 1; transform: translateX(-50%) translateY(0px); }
 
         /* CHECKBOXES */
         .check-circle {
@@ -129,14 +128,15 @@
             width: 90px; height: 90px; border: 3px solid var(--accent-gold);
             transform: rotate(45deg); display: flex; align-items: center; justify-content: center;
             border-radius: 18px; transition: all 0.5s ease; cursor: pointer;
-            box-shadow: 0 0 30px rgba(197, 160, 89, 0.2);
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.3);
         }
+        .mentor-frame:hover { transform: rotate(45deg) scale(1.05); }
         .mentor-content { transform: rotate(-45deg); font-weight: 900; font-size: 1.4rem; color: var(--accent-gold); }
 
         .nabhya-highlight {
             box-shadow: 0 0 25px rgba(113, 113, 122, 0.4);
             animation: pulseGlow 2.5s infinite ease-in-out;
-            border: 2px solid var(--accent-glow) !important;
+            border: 2px solid var(--accent-nabhya) !important;
         }
         @keyframes pulseGlow {
             0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(113, 113, 122, 0.3); }
@@ -162,7 +162,7 @@
         }
         #video-modal video { width: 100%; height: 100%; object-fit: contain; }
         .close-video {
-            position: absolute; top: 2rem; right: 2rem; color: #fff; background: rgba(255,255,255,0.1);
+            position: absolute; top: 2rem; right: 2rem; color: #fff; background: rgba(255,255,255,0.2);
             padding: 1rem 2rem; border-radius: 99px; font-weight: 800; cursor: pointer; z-index: 10001;
             backdrop-filter: blur(10px);
         }
@@ -177,7 +177,7 @@
         }
 
         @media (max-width: 768px) {
-            .dock-container { bottom: 1rem; width: 94vw; overflow-x: auto; padding: 12px; gap: 10px; }
+            .dock-container { bottom: 1rem; width: 94vw; overflow-x: auto; padding: 10px; gap: 8px; }
             .hero-lockup { transform: scale(0.85); }
             .slide { padding: 4rem 1rem 8rem 1rem; }
             .presenter-grid { gap: 1rem; }
@@ -260,7 +260,7 @@
 <div class="slide" id="slide-4">
     <div class="max-w-4xl text-center flex flex-col items-center">
         <h2 class="text-xs font-black uppercase opacity-30 mb-20">The Pyramid Principle</h2>
-        <div class="w-full max-w-sm glass-card p-10 mb-8 border-b-8 border-zinc-700 shadow-2xl"><h3 class="text-2xl font-black uppercase tracking-widest">THE ANSWER</h3></div>
+        <div class="w-full max-w-sm glass-card p-10 mb-8 border-b-8 border-zinc-700 shadow-2xl hover:scale-105 transition-transform"><h3 class="text-2xl font-black uppercase tracking-widest">THE ANSWER</h3></div>
         <div class="grid grid-cols-2 gap-4 w-full max-w-2xl opacity-80 font-black text-[10px] uppercase">
             <div class="glass-card p-6 bg-black/40 border-white/10">Logical Arguments</div>
             <div class="glass-card p-6 bg-black/40 border-white/10">Evidence & Proof</div>
@@ -271,15 +271,15 @@
 <div class="slide" id="slide-5">
     <div class="max-w-6xl w-full grid md:grid-cols-2 gap-10 px-6">
         <div class="glass-card p-10 opacity-40 bg-zinc-950/60 border-rose-500/20 text-center">
-            <h4 class="text-[10px] font-black uppercase text-rose-500 mb-8 tracking-widest">Chaos: Traditional</h4>
-            <p class="text-sm font-serif italic text-zinc-500 leading-relaxed px-4">"Our team analyzed India behavior over 3 months gathering 50 interviews. We found high demand. Therefore, we recommend India."</p>
+            <h4 class="text-[10px] font-black uppercase text-rose-500 mb-8 tracking-widest text-center">Chaos: Traditional</h4>
+            <p class="text-sm font-serif italic text-zinc-500 leading-relaxed px-4">"Our team analyzed India behavior over 3 months gathering 50 interviews. We found demand. Therefore, we recommend India."</p>
         </div>
         <div class="glass-card p-10 border-emerald-500/30 bg-emerald-500/5 shadow-2xl">
-            <h4 class="text-[10px] font-black uppercase text-emerald-500 mb-8 tracking-widest">Clarity: Structured</h4>
+            <h4 class="text-[10px] font-black uppercase text-emerald-500 mb-8 tracking-widest text-center">Clarity: Structured</h4>
             <h3 class="text-xl font-black mb-4 uppercase">Enter India First.</h3>
             <ul class="space-y-3 text-[11px] font-black text-zinc-300">
-                <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-emerald-500"></div> 300M target consumers identified.</li>
-                <li class="flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-emerald-500"></div> Infrastructure verified via regional partners.</li>
+                <li>• 300M target consumers identified.</li>
+                <li>• Infrastructure verified via regional partners.</li>
             </ul>
         </div>
     </div>
@@ -312,10 +312,10 @@
 
 <div class="slide" id="slide-8">
     <div class="max-w-4xl w-full grid md:grid-cols-2 gap-16 items-center px-10">
-        <h2 class="text-5xl font-black tracking-tighter leading-tight text-center md:text-left">Design for<br><span class="italic font-serif text-emerald-500">Scannability</span></h2>
+        <h2 class="text-5xl font-black tracking-tighter leading-tight text-center md:text-left text-zinc-400">Design for<br><span class="italic font-serif text-white">Scannability</span></h2>
         <div class="grid grid-cols-2 gap-4 text-center font-black text-[10px]">
-            <div class="glass-card p-8 border-t border-white/20 uppercase bg-black/20">White Space</div>
-            <div class="glass-card p-8 border-t border-white/20 uppercase text-emerald-400 bg-black/20 shadow-lg">Bold Takeaways</div>
+            <div class="glass-card p-8 border-t border-white/10 uppercase bg-black/20">White Space</div>
+            <div class="glass-card p-8 border-t border-white/10 uppercase text-emerald-400 bg-black/20 shadow-lg">Bold Takeaways</div>
         </div>
     </div>
 </div>
@@ -334,17 +334,17 @@
 <div class="slide" id="slide-10">
     <div class="max-w-4xl w-full flex flex-col gap-6 overflow-y-auto max-h-[75vh] py-8">
         <h2 class="text-xs font-black tracking-[0.6em] uppercase opacity-30 text-center mb-6">Critical Pitfalls</h2>
-        <div class="glass-card p-8 border-l-4 border-rose-500/50 flex items-center gap-10 shadow-xl">
-            <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-rose-500/10 rounded-xl"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z M12 9v4 M12 17h.01"/></svg></div>
-            <div><h4 class="text-lg font-black uppercase mb-1 text-rose-400">Burying the Lead</h4><p class="text-xs opacity-50 mt-1">Findings at the end force reader struggle.</p></div>
+        <div class="glass-card p-6 border-l-4 border-rose-500/50 flex items-center gap-10 shadow-xl">
+            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-rose-500/10 rounded-xl"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z M12 9v4 M12 17h.01"/></svg></div>
+            <div><h4 class="text-lg font-black uppercase mb-1 text-rose-400 leading-none">Burying the Lead</h4><p class="text-xs font-medium opacity-60 mt-1">Findings at the end force reader struggle. Drop-off is immediate.</p></div>
         </div>
-        <div class="glass-card p-8 border-l-4 border-rose-500/50 flex items-center gap-10 shadow-xl">
-            <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-rose-500/10 rounded-xl"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
-            <div><h4 class="text-lg font-black uppercase mb-1 text-rose-400">Passive Stance</h4><p class="text-xs opacity-50 mt-1">"Mistakes were made." Hides ownership.</p></div>
+        <div class="glass-card p-6 border-l-4 border-rose-500/50 flex items-center gap-10 shadow-xl">
+            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-rose-500/10 rounded-xl"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
+            <div><h4 class="text-lg font-black uppercase mb-1 text-rose-400 leading-none">Passive Stance</h4><p class="text-xs font-medium opacity-60 mt-1">"Mistakes were made." Hides ownership and creates ambiguity.</p></div>
         </div>
-        <div class="glass-card p-8 border-l-4 border-rose-500/50 flex items-center gap-10 shadow-xl">
-            <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-rose-500/10 rounded-xl"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18.36 6.64a9 9 0 1 1-12.73 0M12 2v10"/></svg></div>
-            <div><h4 class="text-lg font-black uppercase mb-1 text-rose-400">Logic Gaps</h4><p class="text-xs opacity-50 mt-1">Conclusions without evidence cause stakeholder doubt.</p></div>
+        <div class="glass-card p-6 border-l-4 border-rose-500/50 flex items-center gap-10 shadow-xl">
+            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-rose-500/10 rounded-xl"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18.36 6.64a9 9 0 1 1-12.73 0M12 2v10"/></svg></div>
+            <div><h4 class="text-lg font-black uppercase mb-1 text-rose-400 leading-none">Logic Gaps</h4><p class="text-xs font-medium opacity-60 mt-1">Conclusions without evidence cause stakeholder doubt.</p></div>
         </div>
     </div>
 </div>
@@ -358,7 +358,7 @@
                 <p id="ai-status" class="text-[10px] font-black uppercase tracking-widest opacity-40">Ready to audit</p>
                 <div class="ai-btn" onclick="auditText()">✨ Audit Structure</div>
             </div>
-            <div id="ai-result" class="mt-6 hidden max-h-[160px] overflow-y-auto bg-black/40 p-5 rounded-2xl text-xs leading-relaxed border border-white/10"></div>
+            <div id="ai-result" class="mt-6 hidden max-h-[150px] overflow-y-auto bg-black/40 p-5 rounded-2xl text-xs leading-relaxed border border-white/10"></div>
         </div>
     </div>
 </div>
@@ -394,14 +394,14 @@
         <p class="text-[10px] font-black uppercase tracking-[0.5em] opacity-20 text-center px-4">Complete Checklist to Reveal Team</p>
     </div>
     <div class="max-w-6xl w-full relative z-10 flex flex-col items-center overflow-y-auto max-h-[90vh] py-12 px-6">
-        <div class="flex flex-col items-center mb-12">
+        <div class="flex flex-col items-center mb-8">
             <div class="mentor-frame" onclick="window.open('https://www.linkedin.com/in/lekkhaharrish/', '_blank')">
                 <div class="mentor-content">LH</div>
             </div>
-            <p class="text-[10px] font-black uppercase tracking-widest mt-12 text-[var(--accent-gold)]">Faculty Mentor</p>
-            <p class="text-sm font-black mt-1">Lekkha Harrish</p>
+            <p class="text-[10px] font-black uppercase tracking-widest mt-10 text-[var(--accent-gold)]">Faculty Mentor</p>
+            <p class="text-sm font-black mt-1 text-zinc-400">Lekkha Harrish</p>
         </div>
-        <div class="w-full h-px bg-white/10 mb-16"></div>
+        <div class="w-full h-px bg-white/10 mb-12"></div>
         <div class="presenter-grid" id="presenter-grid"></div>
     </div>
 </div>
@@ -417,6 +417,7 @@
     </div>
 </div>
 
+<!-- NAVIGATION DOCK -->
 <div class="dock-container" id="dock"></div>
 
 <script>
@@ -446,20 +447,20 @@
 
     const slideConfig = [
         { label: "Intro", path: "M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" },
-        { label: "How?", path: "M12 16v-4M12 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" },
-        { label: "Stats", path: "M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" },
-        { label: "Goal", path: "M12 12m-9 0a9 9 0 1 0 18 0" },
-        { label: "Pyramid", path: "M12 2L2 7l10 5 10-5-10-5z" },
-        { label: "Cases", path: "M21 12.79A9 9 0 1 1 11.21 3" },
-        { label: "MECE", path: "M4 4h16v16H4z" },
-        { label: "Flow", path: "M5 12h14" },
-        { label: "Design", path: "M15 3h4a2 2 0 0 1 2 2v14" },
-        { label: "Tight", path: "M6 22V4" },
-        { label: "Faults", path: "M10.29 3.86L1.82 18" },
-        { label: "AI Lab", path: "M21 11.5a8.38 8.38 0 0 1-.9 3.8" },
-        { label: "Verify", path: "M9 11l3 3L22 4" },
-        { label: "Team", path: "M17 21v-2a4 4 0 0 0-4-4H5", isLocked: true },
-        { label: "End", path: "M12 2l3.09 6.26L22 9.27", isLocked: true }
+        { label: "Method", path: "M12 16v-4M12 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" },
+        { label: "Stats", path: "M18 20V10M12 20V4M6 20v-6" },
+        { label: "Goal", path: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" },
+        { label: "Pyramid", path: "M12 2L2 19h20L12 2z" },
+        { label: "Cases", path: "M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6" },
+        { label: "MECE", path: "M21 16V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v11" },
+        { label: "Flow", path: "M9 18l6-6-6-6" },
+        { label: "Design", path: "M12 19l9 2-9-18-9 18 9-2zm0 0v-8" },
+        { label: "Tight", path: "M12 3v18M3 12h18" },
+        { label: "Faults", path: "M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z M12 9v4 M12 17h.01" },
+        { label: "AI", path: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5" },
+        { label: "Verify", path: "M22 11.08V12a10 10 0 1 1-5.93-9.14" },
+        { label: "Team", path: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", isLocked: true },
+        { label: "Final", path: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z", isLocked: true }
     ];
 
     const dock = document.getElementById('dock');
@@ -484,15 +485,13 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
         const geometry = new THREE.IcosahedronGeometry(4.5, 1);
-        const material = new THREE.MeshPhongMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.2, shininess: 100 });
+        const material = new THREE.MeshPhongMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.25, shininess: 100 });
         structure = new THREE.Mesh(geometry, material);
         scene.add(structure);
-        
         scene.add(new THREE.AmbientLight(0xffffff, 0.8));
         const pl = new THREE.PointLight(0xffffff, 1.2);
         pl.position.set(10, 10, 10);
         scene.add(pl);
-        
         camera.position.z = 9;
         animate();
     }
@@ -500,13 +499,14 @@
     function animate() {
         requestAnimationFrame(animate);
         if (structure) {
-            structure.rotation.y += 0.0015;
-            structure.rotation.x += 0.0005;
+            structure.rotation.y += 0.001;
+            structure.rotation.x += 0.0004;
         }
         renderer.render(scene, camera);
     }
 
     let currentSlide = 0;
+    let isNavigating = false;
     const slides = document.querySelectorAll('.slide');
 
     function navigateTo(i) {
@@ -519,7 +519,7 @@
         slides.forEach((slide, idx) => { slide.classList.toggle('active', idx === currentSlide); slide.classList.toggle('prev', idx < currentSlide); });
         document.querySelectorAll('.dock-item').forEach((item, idx) => item.classList.toggle('active', idx === currentSlide));
         document.getElementById('progress').style.width = ((currentSlide + 1) / slides.length) * 100 + '%';
-        if (structure) structure.scale.setScalar(1 + currentSlide * 0.012);
+        if (structure) structure.scale.setScalar(1 + currentSlide * 0.015);
     }
 
     function toggleCheck(el) {
@@ -530,9 +530,8 @@
     function unlockPresentation() {
         isUnlocked = true;
         document.getElementById('unlock-msg').style.opacity = "1";
-        const overlay = document.getElementById('team-lock-overlay');
-        overlay.style.opacity = "0";
-        setTimeout(() => overlay.style.display = "none", 500);
+        document.getElementById('team-lock-overlay').style.opacity = "0";
+        setTimeout(() => document.getElementById('team-lock-overlay').style.display = "none", 500);
         document.querySelectorAll('.dock-item.locked').forEach(item => item.classList.remove('locked'));
     }
 
@@ -542,7 +541,6 @@
         if (structure) { structure.material.color.setHex(isDark ? 0xffffff : 0xcccccc); }
     }
 
-    // GEMINI AUDITOR
     async function auditText() {
         const input = document.getElementById('ai-input').value;
         const status = document.getElementById('ai-status');
@@ -556,9 +554,7 @@
             result.innerText = auditRes;
             result.classList.remove('hidden');
             status.innerText = "✨ Structure Audited";
-        } catch (e) {
-            status.innerText = "Error: Server overloaded. Try again.";
-        }
+        } catch (e) { status.innerText = "Error: Server overloaded."; }
     }
 
     async function callGemini(query, system, retries = 5, delay = 1000) {
@@ -568,7 +564,7 @@
             try {
                 const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 const data = await response.json();
-                return data.candidates?.[0]?.content?.parts?.[0]?.text || "Failed to generate structure.";
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "Failed to generate.";
             } catch (err) {
                 if (i === retries - 1) throw err;
                 await new Promise(r => setTimeout(r, delay));
@@ -582,19 +578,21 @@
         const vid = document.getElementById('impact-vid');
         modal.style.display = 'flex';
         vid.currentTime = 0;
-        const playPromise = vid.play();
-        if (playPromise !== undefined) {
-            playPromise.catch(error => console.log("Playback interrupted:", error));
-        }
+        vid.play().catch(e => console.log("Video interaction required."));
     }
 
     function closeVideo() { document.getElementById('video-modal').style.display = 'none'; document.getElementById('impact-vid').pause(); }
 
-    window.addEventListener('load', () => { init3D(); updateSlides(); });
+    // FIXED SCROLL CONTROL
+    let cooldown = false;
     window.addEventListener('wheel', (e) => {
-        if (Math.abs(e.deltaY) < 50) return;
+        if (Math.abs(e.deltaY) < 40 || cooldown) return;
+        
+        cooldown = true;
         if (e.deltaY > 0 && currentSlide < slides.length - 1) navigateTo(currentSlide + 1);
         else if (e.deltaY < 0 && currentSlide > 0) navigateTo(currentSlide - 1);
+        
+        setTimeout(() => { cooldown = false; }, 1000); // 1s wait between slides
     }, { passive: true });
 
     document.addEventListener('keydown', (e) => {
@@ -603,12 +601,11 @@
     });
 
     window.addEventListener('resize', () => {
-        if (camera) {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-        }
+        if (camera) { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); }
         if (renderer) renderer.setSize(window.innerWidth, window.innerHeight);
     });
+
+    window.addEventListener('load', () => { init3D(); updateSlides(); });
 </script>
 </body>
 </html>
