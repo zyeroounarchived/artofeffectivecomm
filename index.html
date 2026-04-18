@@ -496,18 +496,18 @@
 
         const bladeMat = new THREE.MeshStandardMaterial({ color: 0xdbe2eb, metalness: 0.92, roughness: 0.2 });
         const fullerMat = new THREE.MeshStandardMaterial({ color: 0xaeb7c4, metalness: 0.85, roughness: 0.28 });
-        const guardMat = new THREE.MeshStandardMaterial({ color: 0x8f6935, metalness: 0.78, roughness: 0.32 });
-        const gripMat = new THREE.MeshStandardMaterial({ color: 0x231f1b, metalness: 0.08, roughness: 0.88 });
-        const pommelMat = new THREE.MeshStandardMaterial({ color: 0x7f8c99, metalness: 0.82, roughness: 0.3 });
+        const guardMat = new THREE.MeshStandardMaterial({ color: 0xcbd3de, metalness: 0.9, roughness: 0.24 });
+        const gripMat = new THREE.MeshStandardMaterial({ color: 0xb7c0cd, metalness: 0.88, roughness: 0.3 });
+        const pommelMat = new THREE.MeshStandardMaterial({ color: 0xc4ccd8, metalness: 0.9, roughness: 0.26 });
 
-        const blade = new THREE.Mesh(new THREE.BoxGeometry(0.18, 3.75, 0.055), bladeMat);
-        blade.position.y = 0.9;
+        const blade = new THREE.Mesh(new THREE.BoxGeometry(0.18, 4.6, 0.055), bladeMat);
+        blade.position.y = 1.32;
 
-        const fuller = new THREE.Mesh(new THREE.BoxGeometry(0.045, 2.6, 0.013), fullerMat);
-        fuller.position.set(0, 0.9, 0.03);
+        const fuller = new THREE.Mesh(new THREE.BoxGeometry(0.045, 3.3, 0.013), fullerMat);
+        fuller.position.set(0, 1.32, 0.03);
 
-        const tip = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.44, 4), bladeMat);
-        tip.position.y = 3.0;
+        const tip = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.56, 4), bladeMat);
+        tip.position.y = 3.9;
         tip.rotation.y = Math.PI / 4;
 
         const guardCore = new THREE.Mesh(new THREE.BoxGeometry(1.35, 0.11, 0.2), guardMat);
