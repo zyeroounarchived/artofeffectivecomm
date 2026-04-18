@@ -594,6 +594,11 @@
             ring.rotation.y = Math.random() * Math.PI;
             structure.add(ring);
         }
+
+        const innerRing = new THREE.Mesh(new THREE.TorusGeometry(1.85, 0.03, 16, 100), mat);
+        innerRing.rotation.x = Math.PI * 0.35;
+        innerRing.rotation.y = Math.PI * 0.2;
+        structure.add(innerRing);
         structure.position.set(0, 0, 0);
 
         sword = createMedievalSword();
