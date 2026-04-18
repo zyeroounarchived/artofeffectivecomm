@@ -12,10 +12,10 @@
             --bg: #ffffff;
             --text: #000000;
             --muted: #71717a;
-            --card-bg: rgba(255, 255, 255, 0.45);
+            --card-bg: rgba(255, 255, 255, 0.5);
             --nav-bg: rgba(255, 255, 255, 0.9);
             --accent-gold: #c5a059;
-            --accent-nabhya: #71717a; /* Metallic Grey for Nabhya */
+            --accent-nabhya: #71717a; 
             --accent-green: #10b981;
         }
 
@@ -23,7 +23,7 @@
             --bg: #050505;
             --text: #ffffff;
             --muted: #a1a1aa;
-            --card-bg: rgba(20, 20, 20, 0.75);
+            --card-bg: rgba(20, 20, 20, 0.8);
             --nav-bg: rgba(15, 15, 15, 0.95);
         }
 
@@ -37,6 +37,8 @@
             user-select: none;
             width: 100vw;
             height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         /* TYPOGRAPHIC LOCKUP */
@@ -49,9 +51,9 @@
             width: 100%;
         }
 
-        .hero-top { font-size: clamp(3rem, 12vw, 9.5rem); font-weight: 900; line-height: 0.8; letter-spacing: -0.06em; margin: 0; }
-        .hero-defines { font-family: 'UnifrakturMaguntia', serif; font-size: clamp(4.5rem, 11vw, 9.5rem); line-height: 0.6; margin: 0.15em 0; font-weight: 400; color: var(--text); }
-        .hero-bottom { font-size: clamp(2.2rem, 9vw, 8rem); font-weight: 900; line-height: 0.8; letter-spacing: 0.12em; text-transform: uppercase; margin: 0; }
+        .hero-top { font-size: clamp(2.5rem, 12vw, 9.5rem); font-weight: 900; line-height: 0.8; letter-spacing: -0.06em; margin: 0; }
+        .hero-defines { font-family: 'UnifrakturMaguntia', serif; font-size: clamp(3.5rem, 11vw, 9.5rem); line-height: 0.6; margin: 0.15em 0; font-weight: 400; color: var(--text); }
+        .hero-bottom { font-size: clamp(1.8rem, 9vw, 8rem); font-weight: 900; line-height: 0.8; letter-spacing: 0.12em; text-transform: uppercase; margin: 0; }
 
         .slide {
             position: absolute;
@@ -60,16 +62,17 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 8rem 2rem 10rem 2rem; 
+            padding: 5rem 1.5rem 9rem 1.5rem; 
             opacity: 0;
             visibility: hidden;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease;
-            transform: translateY(40px);
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease;
+            transform: translateY(30px);
             z-index: 10;
+            overflow-y: auto;
         }
 
         .slide.active { opacity: 1; visibility: visible; transform: translateY(0); }
-        .slide.prev { transform: translateY(-40px); opacity: 0; }
+        .slide.prev { transform: translateY(-30px); opacity: 0; }
 
         #bg-canvas {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -78,45 +81,48 @@
 
         .glass-card {
             background: var(--card-bg);
-            backdrop-filter: blur(40px);
-            border: 1px solid rgba(128, 128, 128, 0.15);
-            border-radius: 2rem;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(128, 128, 128, 0.2);
+            border-radius: 1.5rem;
             transition: all 0.4s ease;
-            max-width: 900px;
             width: 100%;
+            max-width: 800px;
         }
 
         /* NAVIGATION DOCK */
         .dock-container {
-            position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
-            z-index: 1000; display: flex; align-items: flex-end; gap: 8px; padding: 10px;
-            background: var(--nav-bg); border-radius: 28px; backdrop-filter: blur(25px);
-            border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 40px 100px rgba(0,0,0,0.3);
-            max-width: 96vw;
+            position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+            z-index: 1000; display: flex; align-items: center; gap: 8px; padding: 10px;
+            background: var(--nav-bg); border-radius: 24px; backdrop-filter: blur(20px);
+            border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+            max-width: 92vw; overflow-x: auto; scrollbar-width: none;
         }
+        .dock-container::-webkit-scrollbar { display: none; }
 
         .dock-item {
-            width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
-            background: rgba(128, 128, 128, 0.1); border-radius: 10px; color: var(--text);
-            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1); cursor: pointer; position: relative;
-            flex-shrink: 0;
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+            background: rgba(128, 128, 128, 0.05); border-radius: 10px; color: var(--text);
+            transition: all 0.25s ease; cursor: pointer; position: relative; flex-shrink: 0;
         }
 
         .dock-item.locked { opacity: 0.1; cursor: not-allowed; filter: grayscale(1); }
-        .dock-item:not(.locked):hover { width: 48px; height: 48px; background: var(--text); color: var(--bg); margin: 0 4px; transform: translateY(-8px); }
-        .dock-item.active { background: var(--text); color: var(--bg); transform: translateY(-12px) scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+        .dock-item:not(.locked):hover { background: var(--text); color: var(--bg); transform: translateY(-4px); }
+        .dock-item.active { background: var(--text); color: var(--bg); transform: scale(1.1); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
 
         .dock-label {
             position: absolute; bottom: 140%; left: 50%; transform: translateX(-50%) translateY(10px);
-            background: var(--text); color: var(--bg); padding: 5px 12px; border-radius: 8px;
-            font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 1.5px;
+            background: var(--text); color: var(--bg); padding: 4px 10px; border-radius: 6px;
+            font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;
             white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.2s ease;
         }
-        .dock-item:not(.locked):hover .dock-label { opacity: 1; transform: translateX(-50%) translateY(0px); }
+        @media (min-width: 1024px) {
+            .dock-item:not(.locked):hover .dock-label { opacity: 1; transform: translateX(-50%) translateY(0px); }
+        }
 
         /* CHECKBOXES */
         .check-circle {
-            width: 24px; height: 24px; border: 2px solid var(--muted); border-radius: 50%;
+            width: 22px; height: 22px; border: 2px solid var(--muted); border-radius: 50%;
             cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
         }
         .check-circle.checked { background: var(--accent-green); border-color: var(--accent-green); color: white; }
@@ -125,13 +131,12 @@
 
         /* MENTOR / PROFILE STYLING */
         .mentor-frame {
-            width: 90px; height: 90px; border: 3px solid var(--accent-gold);
+            width: 80px; height: 80px; border: 3px solid var(--accent-gold);
             transform: rotate(45deg); display: flex; align-items: center; justify-content: center;
-            border-radius: 18px; transition: all 0.5s ease; cursor: pointer;
-            box-shadow: 0 0 30px rgba(197, 160, 89, 0.3);
+            border-radius: 15px; transition: all 0.5s ease; cursor: pointer;
+            box-shadow: 0 0 20px rgba(197, 160, 89, 0.2);
         }
-        .mentor-frame:hover { transform: rotate(45deg) scale(1.05); }
-        .mentor-content { transform: rotate(-45deg); font-weight: 900; font-size: 1.4rem; color: var(--accent-gold); }
+        .mentor-content { transform: rotate(-45deg); font-weight: 900; font-size: 1.2rem; color: var(--accent-gold); }
 
         .nabhya-highlight {
             box-shadow: 0 0 25px rgba(113, 113, 122, 0.4);
@@ -139,20 +144,8 @@
             border: 2px solid var(--accent-nabhya) !important;
         }
         @keyframes pulseGlow {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(113, 113, 122, 0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 0 35px rgba(113, 113, 122, 0.6); }
-        }
-
-        /* AI AUDITOR UI */
-        .ai-input {
-            width: 100%; height: 100px; background: rgba(0,0,0,0.1); border: 1px solid rgba(128,128,128,0.2);
-            border-radius: 1rem; padding: 1rem; color: var(--text); resize: none; font-size: 0.85rem;
-            outline: none; transition: border-color 0.3s;
-        }
-        .ai-btn {
-            background: var(--text); color: var(--bg); padding: 0.6rem 1.2rem; border-radius: 99px;
-            font-weight: 900; font-size: 0.7rem; cursor: pointer; transition: transform 0.2s;
-            text-transform: uppercase; letter-spacing: 1px;
+            0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(113, 113, 122, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(113, 113, 122, 0.5); }
         }
 
         /* VIDEO MODAL */
@@ -162,25 +155,30 @@
         }
         #video-modal video { width: 100%; height: 100%; object-fit: contain; }
         .close-video {
-            position: absolute; top: 2rem; right: 2rem; color: #fff; background: rgba(255,255,255,0.2);
-            padding: 1rem 2rem; border-radius: 99px; font-weight: 800; cursor: pointer; z-index: 10001;
-            backdrop-filter: blur(10px);
+            position: absolute; top: 1rem; right: 1rem; color: #fff; background: rgba(255,255,255,0.2);
+            padding: 0.8rem 1.5rem; border-radius: 99px; font-weight: 800; cursor: pointer; z-index: 10001;
         }
 
-        .presenter-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; width: 100%; max-width: 1100px; }
-        .progress-bar { position: fixed; top: 0; left: 0; height: 4px; background: var(--text); z-index: 1000; transition: width 0.6s ease; }
+        .presenter-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; width: 100%; max-width: 900px; }
+        @media (min-width: 768px) { .presenter-grid { grid-template-columns: repeat(4, 1fr); gap: 2rem; } }
+
+        .progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: var(--text); z-index: 1000; transition: width 0.6s ease; }
 
         .theme-toggle {
-            position: fixed; top: 2rem; right: 2rem; z-index: 1000; cursor: pointer;
-            width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            background: var(--nav-bg); color: var(--text); border: 1px solid rgba(128,128,128,0.2);
+            position: fixed; top: 1.5rem; right: 1rem; z-index: 1000; cursor: pointer;
+            width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            background: var(--nav-bg); color: var(--text); border: 1px solid rgba(128, 128, 128, 0.2);
+        }
+
+        .ai-input {
+            width: 100%; height: 80px; background: rgba(0,0,0,0.1); border: 1px solid rgba(128,128,128,0.2);
+            border-radius: 0.8rem; padding: 0.8rem; color: var(--text); resize: none; font-size: 0.8rem;
         }
 
         @media (max-width: 768px) {
-            .dock-container { bottom: 1rem; width: 94vw; overflow-x: auto; padding: 10px; gap: 8px; }
-            .hero-lockup { transform: scale(0.85); }
-            .slide { padding: 4rem 1rem 8rem 1rem; }
-            .presenter-grid { gap: 1rem; }
+            .hero-lockup { transform: translateY(-5%); }
+            .grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+            .slide { padding-bottom: 8rem; }
         }
     </style>
 </head>
@@ -196,228 +194,223 @@
     </video>
 </div>
 
-<div class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+<div class="theme-toggle" onclick="toggleTheme()">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
 </div>
 
 <!-- Slides 0-14 -->
 <div class="slide active" id="slide-0">
     <div class="hero-lockup">
-        <p class="text-[10px] font-black tracking-[0.8em] uppercase opacity-30 mb-8">The Art of Effective Communication</p>
+        <p class="text-[9px] font-black tracking-[0.5em] uppercase opacity-30 mb-6">Effective Communication</p>
         <h1 class="hero-top">STRUCTURED</h1>
         <div class="hero-defines">defines</div>
         <h1 class="hero-bottom">CLARITY</h1>
-        <p class="text-xs md:text-sm font-light opacity-40 max-w-sm mx-auto leading-relaxed mt-12 md:mt-24 uppercase tracking-[0.2em]">Practical Document Architecture</p>
-        <div class="mt-8 text-[9px] font-black tracking-[0.4em] opacity-20 uppercase">Presentation • 20 April 2026</div>
+        <p class="text-xs font-light opacity-40 max-w-[250px] mx-auto leading-relaxed mt-10 uppercase tracking-[0.1em]">Practical Document Architecture</p>
+        <div class="mt-8 text-[8px] font-black tracking-[0.3em] opacity-20 uppercase">Presentation • 20 April 2026</div>
     </div>
 </div>
 
 <div class="slide" id="slide-1">
-    <div class="max-w-5xl w-full text-center">
-        <h2 class="text-xl md:text-3xl font-black uppercase tracking-[0.2em] mb-12">The Methodology: How?</h2>
-        <div class="grid md:grid-cols-3 gap-8">
-            <div class="glass-card p-10 border-t-2 border-zinc-700">
-                <h3 class="text-sm font-black mb-6 uppercase tracking-widest">Logic Clusters</h3>
-                <p class="text-[11px] opacity-60 leading-relaxed">Organize thoughts using MECE to eliminate overlaps and logical gaps before writing.</p>
+    <div class="max-w-md w-full">
+        <h2 class="text-xs font-black tracking-[0.4em] uppercase opacity-30 mb-10 text-center italic">The "How?" Methodology</h2>
+        <div class="grid gap-4">
+            <div class="glass-card p-6 border-t-2 border-zinc-700">
+                <h3 class="text-xs font-black mb-3 uppercase">Logic Clusters</h3>
+                <p class="text-[10px] opacity-60 leading-relaxed">Organize thoughts using MECE to eliminate overlaps before writing.</p>
             </div>
-            <div class="glass-card p-10 border-t-2 border-zinc-700">
-                <h3 class="text-sm font-black mb-6 uppercase tracking-widest">Inverted Stacks</h3>
-                <p class="text-[11px] opacity-60 leading-relaxed">Lead with the conclusion. Respect reader time by ranking findings by impact.</p>
+            <div class="glass-card p-6 border-t-2 border-zinc-700">
+                <h3 class="text-xs font-black mb-3 uppercase">Inverted Stacks</h3>
+                <p class="text-[10px] opacity-60 leading-relaxed">Lead with the conclusion. Respect reader time by ranking findings.</p>
             </div>
-            <div class="glass-card p-10 border-t-2 border-zinc-700">
-                <h3 class="text-sm font-black mb-6 uppercase tracking-widest">Visual GPS</h3>
-                <p class="text-[11px] opacity-60 leading-relaxed">Engineer for scannability. Use white space and signposting as visual roadmaps.</p>
+            <div class="glass-card p-6 border-t-2 border-zinc-700">
+                <h3 class="text-xs font-black mb-3 uppercase">Visual GPS</h3>
+                <p class="text-[10px] opacity-60 leading-relaxed">Use white space and signposting as roadmaps for scannability.</p>
             </div>
         </div>
     </div>
 </div>
 
 <div class="slide" id="slide-2">
-    <div class="max-w-4xl w-full grid md:grid-cols-3 gap-8 text-center">
-        <h2 class="col-span-full text-xs font-black uppercase tracking-[0.5em] opacity-30 mb-12">The Economic Reality</h2>
-        <div><span class="text-7xl font-black block">23h</span><p class="text-zinc-500 uppercase text-[9px] font-black mt-8">Weekly Reading Waste</p></div>
-        <div><span class="text-7xl font-black block">67%</span><p class="text-zinc-500 uppercase text-[9px] font-black mt-8">Exec. Friction</p></div>
-        <div><span class="text-7xl font-black block text-emerald-500">LOST</span><p class="text-zinc-500 uppercase text-[9px] font-black mt-8">Project Momentum</p></div>
+    <div class="max-w-md w-full grid gap-8 text-center">
+        <h2 class="text-[10px] font-black uppercase tracking-[0.4em] opacity-30 mb-6">The Reality</h2>
+        <div><span class="text-6xl font-black block">23h</span><p class="text-zinc-500 uppercase text-[8px] font-black mt-4">Reading Waste / Week</p></div>
+        <div><span class="text-6xl font-black block">67%</span><p class="text-zinc-500 uppercase text-[8px] font-black mt-4">Exec. Friction</p></div>
+        <div><span class="text-6xl font-black block text-emerald-500">LOST</span><p class="text-zinc-500 uppercase text-[8px] font-black mt-4">Project Momentum</p></div>
     </div>
 </div>
 
 <div class="slide" id="slide-3">
-    <div class="max-w-5xl w-full grid md:grid-cols-2 gap-24 items-center px-10">
-        <h2 class="text-6xl font-black tracking-tighter leading-[0.9] text-center md:text-left">Strategic<br><span class="text-zinc-500 italic font-serif">Foundations</span></h2>
-        <div class="grid gap-6">
-            <div class="glass-card p-8 border-l-4 border-zinc-700 text-left shadow-xl">
-                <h4 class="font-black text-[9px] tracking-widest uppercase opacity-40 mb-3">Goal Identification</h4>
-                <p class="text-base font-bold leading-tight">Define Action: Inform, Persuade, or Request?</p>
+    <div class="max-w-md w-full grid gap-10 px-4">
+        <h2 class="text-4xl font-black tracking-tighter leading-[0.9] text-center">Strategic<br><span class="text-zinc-500 italic font-serif text-3xl">Foundations</span></h2>
+        <div class="grid gap-4">
+            <div class="glass-card p-6 border-l-4 border-zinc-700 shadow-lg">
+                <h4 class="font-black text-[8px] tracking-widest uppercase opacity-40 mb-2">Goal Identification</h4>
+                <p class="text-xs font-bold leading-tight">Define Action: Inform, Persuade, or Request?</p>
             </div>
-            <div class="glass-card p-8 border-l-4 border-zinc-700 text-left shadow-xl">
-                <h4 class="font-black text-[9px] tracking-widest uppercase opacity-40 mb-3">Context Mapping</h4>
-                <p class="text-base font-bold leading-tight">Who is reading? CEO needs bottom line; peer needs details.</p>
+            <div class="glass-card p-6 border-l-4 border-zinc-700 shadow-lg">
+                <h4 class="font-black text-[8px] tracking-widest uppercase opacity-40 mb-2">Context Mapping</h4>
+                <p class="text-xs font-bold leading-tight">Who is reading? CEO needs bottom line; peer needs details.</p>
             </div>
         </div>
     </div>
 </div>
 
 <div class="slide" id="slide-4">
-    <div class="max-w-4xl text-center flex flex-col items-center">
-        <h2 class="text-xs font-black uppercase opacity-30 mb-20">The Pyramid Principle</h2>
-        <div class="w-full max-w-sm glass-card p-10 mb-8 border-b-8 border-zinc-700 shadow-2xl hover:scale-105 transition-transform"><h3 class="text-2xl font-black uppercase tracking-widest">THE ANSWER</h3></div>
-        <div class="grid grid-cols-2 gap-4 w-full max-w-2xl opacity-80 font-black text-[10px] uppercase">
-            <div class="glass-card p-6 bg-black/40 border-white/10">Logical Arguments</div>
-            <div class="glass-card p-6 bg-black/40 border-white/10">Evidence & Proof</div>
+    <div class="max-w-md text-center flex flex-col items-center">
+        <h2 class="text-xs font-black uppercase opacity-30 mb-12">The Pyramid Principle</h2>
+        <div class="w-full glass-card p-8 mb-6 border-b-8 border-zinc-700 shadow-xl"><h3 class="text-xl font-black uppercase tracking-widest">THE ANSWER</h3></div>
+        <div class="grid grid-cols-2 gap-3 w-full opacity-80 font-black text-[8px] uppercase">
+            <div class="glass-card p-4 bg-black/30">Arguments</div>
+            <div class="glass-card p-4 bg-black/30">Raw Evidence</div>
         </div>
+        <p class="mt-10 text-[9px] text-zinc-500 italic max-w-[200px]">"Lead with the punchline. Business writing is not a mystery novel."</p>
     </div>
 </div>
 
 <div class="slide" id="slide-5">
-    <div class="max-w-6xl w-full grid md:grid-cols-2 gap-10 px-6">
-        <div class="glass-card p-10 opacity-40 bg-zinc-950/60 border-rose-500/20 text-center">
-            <h4 class="text-[10px] font-black uppercase text-rose-500 mb-8 tracking-widest text-center">Chaos: Traditional</h4>
-            <p class="text-sm font-serif italic text-zinc-500 leading-relaxed px-4">"Our team analyzed India behavior over 3 months gathering 50 interviews. We found demand. Therefore, we recommend India."</p>
+    <div class="max-w-md w-full grid gap-6">
+        <div class="glass-card p-6 opacity-40 bg-zinc-950/60 border-rose-500/20 text-center">
+            <h4 class="text-[8px] font-black uppercase text-rose-500 mb-4">Chaos: Traditional</h4>
+            <p class="text-[10px] font-serif italic text-zinc-500 leading-relaxed">"Our team analyzed India behavior gathering 50 interviews. We found demand. Therefore, we recommend India."</p>
         </div>
-        <div class="glass-card p-10 border-emerald-500/30 bg-emerald-500/5 shadow-2xl">
-            <h4 class="text-[10px] font-black uppercase text-emerald-500 mb-8 tracking-widest text-center">Clarity: Structured</h4>
-            <h3 class="text-xl font-black mb-4 uppercase">Enter India First.</h3>
-            <ul class="space-y-3 text-[11px] font-black text-zinc-300">
-                <li>• 300M target consumers identified.</li>
-                <li>• Infrastructure verified via regional partners.</li>
+        <div class="glass-card p-6 border-emerald-500/30 bg-emerald-500/5 shadow-2xl">
+            <h4 class="text-[8px] font-black uppercase text-emerald-500 mb-4">Clarity: Structured</h4>
+            <h3 class="text-lg font-black mb-3 uppercase">Enter India First.</h3>
+            <ul class="space-y-2 text-[9px] font-black text-zinc-400">
+                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div> 300M target consumers identified.</li>
+                <li class="flex items-center gap-2"><div class="w-1.5 h-1.5 rounded-full bg-emerald-500"></div> Verification completed in-region.</li>
             </ul>
         </div>
     </div>
 </div>
 
 <div class="slide" id="slide-6">
-    <div class="max-w-4xl w-full grid grid-cols-2 gap-12 text-center">
-        <div class="glass-card p-12 border-t-4 border-zinc-700 shadow-2xl">
-            <h3 class="text-lg font-black uppercase mb-6">No Overlaps</h3>
-            <p class="text-[11px] opacity-60 italic leading-relaxed font-medium">Arguments stand alone. Repetition indicates broken logic.</p>
+    <div class="max-w-md w-full grid gap-6 text-center">
+        <div class="glass-card p-8 border-t-4 border-zinc-700 shadow-xl">
+            <h3 class="text-sm font-black uppercase mb-4">No Overlaps</h3>
+            <p class="text-[10px] opacity-60 italic leading-relaxed">Mutually Exclusive. Arguments must stand alone.</p>
         </div>
-        <div class="glass-card p-12 border-t-4 border-zinc-700 shadow-2xl">
-            <h3 class="text-lg font-black uppercase mb-6">No Gaps</h3>
-            <p class="text-[11px] opacity-60 italic leading-relaxed font-medium">Logic covers 100% of scope. No missing data for stakeholders.</p>
+        <div class="glass-card p-8 border-t-4 border-zinc-700 shadow-xl">
+            <h3 class="text-sm font-black uppercase mb-4">No Gaps</h3>
+            <p class="text-[10px] opacity-60 italic leading-relaxed">Collectively Exhaustive. Cover 100% of scope logic.</p>
         </div>
     </div>
 </div>
 
 <div class="slide" id="slide-7">
-    <div class="max-w-4xl text-center">
-        <h2 class="text-xs font-black tracking-[0.8em] uppercase opacity-30 mb-20">The Flow GPS</h2>
-        <div class="grid grid-cols-3 gap-6 text-center">
-            <div class="glass-card p-6 uppercase font-black text-[10px] bg-black/60 text-white border-white/20 tracking-widest">Expectation</div>
-            <div class="glass-card p-6 uppercase font-black text-[10px] bg-black/60 text-white border-white/20 tracking-widest">Navigation</div>
-            <div class="glass-card p-6 uppercase font-black text-[10px] bg-black/60 text-white border-white/20 tracking-widest">Synthesis</div>
+    <div class="max-w-md text-center px-4">
+        <h2 class="text-xs font-black tracking-[0.6em] uppercase opacity-30 mb-12">The Flow GPS</h2>
+        <div class="grid gap-3 text-center">
+            <div class="glass-card p-4 uppercase font-black text-[8px] bg-black/60 border-white/20">Expectation</div>
+            <div class="glass-card p-4 uppercase font-black text-[8px] bg-black/60 border-white/20">Navigation</div>
+            <div class="glass-card p-4 uppercase font-black text-[8px] bg-black/60 border-white/20">Synthesis</div>
         </div>
-        <p class="mt-20 text-[14px] font-black italic leading-relaxed max-w-lg mx-auto bg-black/50 p-6 rounded-2xl border border-white/10 shadow-2xl">"Driving a highway with no road signs is exactly what an unstructured document feels like."</p>
+        <p class="mt-12 text-[11px] font-black italic leading-relaxed bg-black/50 p-5 rounded-2xl border border-white/10 shadow-2xl">"Driving a highway with no road signs is an unstructured document."</p>
     </div>
 </div>
 
 <div class="slide" id="slide-8">
-    <div class="max-w-4xl w-full grid md:grid-cols-2 gap-16 items-center px-10">
-        <h2 class="text-5xl font-black tracking-tighter leading-tight text-center md:text-left text-zinc-400">Design for<br><span class="italic font-serif text-white">Scannability</span></h2>
-        <div class="grid grid-cols-2 gap-4 text-center font-black text-[10px]">
-            <div class="glass-card p-8 border-t border-white/10 uppercase bg-black/20">White Space</div>
-            <div class="glass-card p-8 border-t border-white/10 uppercase text-emerald-400 bg-black/20 shadow-lg">Bold Takeaways</div>
+    <div class="max-w-md w-full grid gap-10 items-center px-6">
+        <h2 class="text-3xl font-black tracking-tighter leading-tight text-center">Design for<br><span class="italic font-serif text-emerald-500">Scannability</span></h2>
+        <div class="grid grid-cols-2 gap-3 text-center font-black text-[8px]">
+            <div class="glass-card p-6 border-t border-white/10 uppercase">White Space</div>
+            <div class="glass-card p-6 border-t border-white/10 uppercase text-emerald-400 shadow-lg">Bold Keys</div>
         </div>
     </div>
 </div>
 
 <div class="slide" id="slide-9">
-    <div class="max-w-3xl w-full text-center">
-        <h2 class="text-xs font-black tracking-[0.5em] uppercase opacity-30 mb-20">The 'So What?' Test</h2>
-        <div class="space-y-12">
-            <div class="opacity-30 text-xl font-serif">"It is important to note that we are currently experiencing a decline in market share."</div>
-            <div class="w-16 h-px bg-zinc-800 mx-auto opacity-30"></div>
-            <div class="text-4xl font-black tracking-tighter uppercase text-emerald-400 drop-shadow-2xl">"Our market share is declining."</div>
+    <div class="max-w-md w-full text-center px-6">
+        <h2 class="text-xs font-black tracking-[0.4em] uppercase opacity-30 mb-12">The 'So What?' Test</h2>
+        <div class="space-y-8">
+            <div class="opacity-30 text-sm font-serif italic">"It is important to note that we are currently experiencing a decline in market share."</div>
+            <div class="w-10 h-px bg-zinc-800 mx-auto opacity-30"></div>
+            <div class="text-2xl font-black tracking-tighter uppercase text-emerald-400 drop-shadow-xl">"Our market share is declining."</div>
         </div>
     </div>
 </div>
 
 <div class="slide" id="slide-10">
-    <div class="max-w-4xl w-full flex flex-col gap-6 overflow-y-auto max-h-[75vh] py-8">
-        <h2 class="text-xs font-black tracking-[0.6em] uppercase opacity-30 text-center mb-6">Critical Pitfalls</h2>
-        <div class="glass-card p-6 border-l-4 border-rose-500/50 flex items-center gap-10 shadow-xl">
-            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-rose-500/10 rounded-xl"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z M12 9v4 M12 17h.01"/></svg></div>
-            <div><h4 class="text-lg font-black uppercase mb-1 text-rose-400 leading-none">Burying the Lead</h4><p class="text-xs font-medium opacity-60 mt-1">Findings at the end force reader struggle. Drop-off is immediate.</p></div>
+    <div class="max-w-md w-full flex flex-col gap-4 overflow-y-auto max-h-[70vh]">
+        <h2 class="text-xs font-black tracking-[0.4em] uppercase opacity-30 text-center mb-4">Critical Pitfalls</h2>
+        <div class="glass-card p-5 border-l-4 border-rose-500/50 flex items-center gap-6">
+            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-rose-500/10 rounded-xl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div>
+            <div><h4 class="text-xs font-black uppercase text-rose-400">Burying the Lead</h4><p class="text-[9px] opacity-50 mt-1">Conclusion at the end forces reader struggle.</p></div>
         </div>
-        <div class="glass-card p-6 border-l-4 border-rose-500/50 flex items-center gap-10 shadow-xl">
-            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-rose-500/10 rounded-xl"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
-            <div><h4 class="text-lg font-black uppercase mb-1 text-rose-400 leading-none">Passive Stance</h4><p class="text-xs font-medium opacity-60 mt-1">"Mistakes were made." Hides ownership and creates ambiguity.</p></div>
-        </div>
-        <div class="glass-card p-6 border-l-4 border-rose-500/50 flex items-center gap-10 shadow-xl">
-            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-rose-500/10 rounded-xl"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18.36 6.64a9 9 0 1 1-12.73 0M12 2v10"/></svg></div>
-            <div><h4 class="text-lg font-black uppercase mb-1 text-rose-400 leading-none">Logic Gaps</h4><p class="text-xs font-medium opacity-60 mt-1">Conclusions without evidence cause stakeholder doubt.</p></div>
+        <div class="glass-card p-5 border-l-4 border-rose-500/50 flex items-center gap-6">
+            <div class="w-10 h-10 flex-shrink-0 flex items-center justify-center bg-rose-500/10 rounded-xl"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 9v2m0 4h.01"/></svg></div>
+            <div><h4 class="text-xs font-black uppercase text-rose-400">Passive Stance</h4><p class="text-[9px] opacity-50 mt-1">"Mistakes were made." Hides ownership.</p></div>
         </div>
     </div>
 </div>
 
 <div class="slide" id="slide-11">
-    <div class="max-w-2xl w-full">
-        <h2 class="text-xs font-black tracking-[0.6em] uppercase opacity-30 text-center mb-8">✨ AI Architecture Lab</h2>
-        <div class="glass-card p-8 border-t-2 border-white/20 shadow-2xl">
-            <textarea id="ai-input" class="ai-input" placeholder="Paste your messy text here..."></textarea>
-            <div class="flex justify-between items-center mt-6">
-                <p id="ai-status" class="text-[10px] font-black uppercase tracking-widest opacity-40">Ready to audit</p>
-                <div class="ai-btn" onclick="auditText()">✨ Audit Structure</div>
+    <div class="max-w-md w-full px-4">
+        <h2 class="text-xs font-black tracking-[0.5em] uppercase opacity-30 text-center mb-6">✨ AI Architecture Lab</h2>
+        <div class="glass-card p-6 border-t-2 border-white/20 shadow-2xl">
+            <textarea id="ai-input" class="ai-input" placeholder="Paste messy text..."></textarea>
+            <div class="flex justify-between items-center mt-4">
+                <p id="ai-status" class="text-[8px] font-black uppercase opacity-40">Ready</p>
+                <div class="ai-btn" onclick="auditText()">✨ Audit</div>
             </div>
-            <div id="ai-result" class="mt-6 hidden max-h-[150px] overflow-y-auto bg-black/40 p-5 rounded-2xl text-xs leading-relaxed border border-white/10"></div>
+            <div id="ai-result" class="mt-4 hidden max-h-[120px] overflow-y-auto bg-black/40 p-4 rounded-xl text-[9px] leading-relaxed border border-white/10"></div>
         </div>
     </div>
 </div>
 
 <div class="slide" id="slide-12">
-    <div class="max-w-2xl w-full flex flex-col items-center">
-        <h2 class="text-4xl font-black mb-12 text-center uppercase tracking-[0.2em]">Final Audit</h2>
-        <div class="space-y-4 w-full">
-            <div class="flex items-center gap-6 p-6 glass-card cursor-pointer group shadow-2xl" onclick="toggleCheck(this)">
-                <div class="check-circle group-hover:border-white transition-colors"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <p class="text-sm font-black uppercase tracking-widest">Purpose & Audience identified?</p>
+    <div class="max-w-md w-full flex flex-col items-center">
+        <h2 class="text-2xl font-black mb-10 text-center uppercase tracking-[0.1em]">Final Audit</h2>
+        <div class="space-y-3 w-full">
+            <div class="flex items-center gap-4 p-5 glass-card cursor-pointer" onclick="toggleCheck(this)">
+                <div class="check-circle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></div>
+                <p class="text-[10px] font-black uppercase tracking-widest">Purpose & Audience clear?</p>
             </div>
-            <div class="flex items-center gap-6 p-6 glass-card cursor-pointer group shadow-2xl" onclick="toggleCheck(this)">
-                <div class="check-circle group-hover:border-white transition-colors"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <p class="text-sm font-black uppercase tracking-widest">Conclusion in first paragraph?</p>
+            <div class="flex items-center gap-4 p-5 glass-card cursor-pointer" onclick="toggleCheck(this)">
+                <div class="check-circle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></div>
+                <p class="text-[10px] font-black uppercase tracking-widest">Conclusion in first paragraph?</p>
             </div>
-            <div class="flex items-center gap-6 p-6 glass-card cursor-pointer group shadow-2xl" onclick="toggleCheck(this)">
-                <div class="check-circle group-hover:border-white transition-colors"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <p class="text-sm font-black uppercase tracking-widest">Structure MECE & Signposted?</p>
+            <div class="flex items-center gap-4 p-5 glass-card cursor-pointer" onclick="toggleCheck(this)">
+                <div class="check-circle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></div>
+                <p class="text-[10px] font-black uppercase tracking-widest">Structure MECE & Signposted?</p>
             </div>
-            <div class="flex items-center gap-6 p-6 glass-card cursor-pointer group shadow-2xl" onclick="toggleCheck(this)">
-                <div class="check-circle group-hover:border-white transition-colors"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <p class="text-sm font-black uppercase tracking-widest">Clear call to action stated?</p>
+            <div class="flex items-center gap-4 p-5 glass-card cursor-pointer" onclick="toggleCheck(this)">
+                <div class="check-circle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></div>
+                <p class="text-[10px] font-black uppercase tracking-widest">Clear action stated?</p>
             </div>
         </div>
-        <div id="unlock-msg" class="text-center mt-10 text-[11px] font-black text-emerald-400 uppercase tracking-[0.5em] opacity-0 transition-opacity">Full Presentation Unlocked</div>
+        <div id="unlock-msg" class="text-center mt-6 text-[10px] font-black text-emerald-400 opacity-0">AUTHENTICATED</div>
     </div>
 </div>
 
 <div class="slide" id="slide-13">
-    <div id="team-lock-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(25px); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease;">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="opacity-20 mb-6"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        <p class="text-[10px] font-black uppercase tracking-[0.5em] opacity-20 text-center px-4">Complete Checklist to Reveal Team</p>
+    <div id="team-lock-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(25px); z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <p class="text-[9px] font-black uppercase tracking-[0.4em] opacity-30 text-center px-4">Complete Checklist to Reveal Team</p>
     </div>
-    <div class="max-w-6xl w-full relative z-10 flex flex-col items-center overflow-y-auto max-h-[90vh] py-12 px-6">
+    <div class="max-w-6xl w-full relative z-10 flex flex-col items-center overflow-y-auto max-h-[85vh] py-6 px-4">
         <div class="flex flex-col items-center mb-8">
             <div class="mentor-frame" onclick="window.open('https://www.linkedin.com/in/lekkhaharrish/', '_blank')">
                 <div class="mentor-content">LH</div>
             </div>
-            <p class="text-[10px] font-black uppercase tracking-widest mt-10 text-[var(--accent-gold)]">Faculty Mentor</p>
-            <p class="text-sm font-black mt-1 text-zinc-400">Lekkha Harrish</p>
+            <p class="text-[9px] font-black uppercase tracking-widest mt-10 text-[var(--accent-gold)]">Faculty Mentor</p>
+            <p class="text-xs font-black mt-1 text-zinc-400">Lekkha Harrish</p>
         </div>
-        <div class="w-full h-px bg-white/10 mb-12"></div>
+        <div class="w-full h-px bg-white/10 mb-8"></div>
         <div class="presenter-grid" id="presenter-grid"></div>
     </div>
 </div>
 
 <div class="slide" id="slide-14">
-    <div class="text-center">
-        <p class="text-[11px] font-black tracking-[2.5em] uppercase opacity-20 mb-16">Structure defines clarity.</p>
-        <h2 id="impact-text" class="text-7xl md:text-[12rem] font-black italic font-serif tracking-tighter leading-none cursor-pointer hover:opacity-70 transition-all drop-shadow-2xl" onclick="playImpact()">IMPACT.</h2>
-        <div class="mt-24 flex items-center justify-center gap-12 opacity-30">
-            <div class="text-[9px] font-black uppercase tracking-widest underline underline-offset-8 decoration-2">2026 Edition</div>
-            <div class="text-[9px] font-black uppercase tracking-widest">Thank You</div>
+    <div class="text-center px-6">
+        <p class="text-[10px] font-black tracking-[1.5em] uppercase opacity-20 mb-12">Structure defines clarity.</p>
+        <h2 id="impact-text" class="text-6xl font-black italic font-serif tracking-tighter leading-none cursor-pointer hover:opacity-70 transition-all drop-shadow-2xl" onclick="playImpact()">IMPACT.</h2>
+        <div class="mt-20 flex items-center justify-center gap-6 opacity-30">
+            <div class="text-[8px] font-black uppercase tracking-widest decoration-2">2026 Edition</div>
+            <div class="text-[8px] font-black uppercase tracking-widest">Thank You</div>
         </div>
     </div>
 </div>
 
-<!-- NAVIGATION DOCK -->
 <div class="dock-container" id="dock"></div>
 
 <script>
@@ -436,31 +429,31 @@
     const grid = document.getElementById('presenter-grid');
     team.forEach((p) => {
         const div = document.createElement('div');
-        div.style.flex = "0 0 130px";
-        div.className = "flex flex-col items-center group cursor-pointer";
+        div.className = "flex flex-col items-center group cursor-pointer text-center";
         div.onclick = () => window.open(p.url, '_blank');
         div.innerHTML = `
-            <div class="w-14 h-14 md:w-16 md:h-16 rounded-2xl shadow-xl mb-3 transition-all duration-500 group-hover:scale-110 flex items-center justify-center text-white text-xl font-black ${p.isNabhya ? 'nabhya-highlight' : ''}" style="background: ${p.color}">${p.name[0]}</div>
-            <p class="text-[9px] font-black text-center opacity-40 uppercase tracking-tighter group-hover:opacity-100 transition-all">${p.name}</p>`;
+            <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl shadow-xl mb-3 transition-all duration-500 flex items-center justify-center text-white text-lg font-black ${p.isNabhya ? 'nabhya-highlight' : ''}" style="background: ${p.color}">${p.name[0]}</div>
+            <p class="text-[7px] md:text-[9px] font-black uppercase tracking-tighter opacity-40 group-hover:opacity-100">${p.name}</p>`;
         grid.appendChild(div);
     });
 
+    // Redesigned SVGs for clarity
     const slideConfig = [
         { label: "Intro", path: "M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" },
-        { label: "Method", path: "M12 16v-4M12 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" },
+        { label: "How?", path: "M12 16v-4M12 8h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" },
         { label: "Stats", path: "M18 20V10M12 20V4M6 20v-6" },
-        { label: "Goal", path: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" },
-        { label: "Pyramid", path: "M12 2L2 19h20L12 2z" },
-        { label: "Cases", path: "M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6" },
+        { label: "Goals", path: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" },
+        { label: "Pyramid", path: "M12 2L2 19h20z" },
+        { label: "Cases", path: "M16 3h5v5M4 20L21 3M15 15l6 6" },
         { label: "MECE", path: "M21 16V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v11" },
         { label: "Flow", path: "M9 18l6-6-6-6" },
-        { label: "Design", path: "M12 19l9 2-9-18-9 18 9-2zm0 0v-8" },
+        { label: "Visual", path: "M12 19l9 2-9-18-9 18 9-2z" },
         { label: "Tight", path: "M12 3v18M3 12h18" },
-        { label: "Faults", path: "M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z M12 9v4 M12 17h.01" },
-        { label: "AI", path: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5" },
+        { label: "Faults", path: "M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z M12 9v4" },
+        { label: "AI", path: "M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-11.4-11.4A8.38 8.38 0 0 1 12.5 3" },
         { label: "Verify", path: "M22 11.08V12a10 10 0 1 1-5.93-9.14" },
-        { label: "Team", path: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", isLocked: true },
-        { label: "Final", path: "M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z", isLocked: true }
+        { label: "Team", path: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2", isLocked: true },
+        { label: "End", path: "M12 2l3.09 6.26L22 9.27l-5 4.87", isLocked: true }
     ];
 
     const dock = document.getElementById('dock');
@@ -485,41 +478,38 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
         const geometry = new THREE.IcosahedronGeometry(4.5, 1);
-        const material = new THREE.MeshPhongMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.25, shininess: 100 });
+        const material = new THREE.MeshPhongMaterial({ color: 0xffffff, wireframe: true, transparent: true, opacity: 0.2, shininess: 100 });
         structure = new THREE.Mesh(geometry, material);
         scene.add(structure);
         scene.add(new THREE.AmbientLight(0xffffff, 0.8));
-        const pl = new THREE.PointLight(0xffffff, 1.2);
-        pl.position.set(10, 10, 10);
-        scene.add(pl);
+        const pl = new THREE.PointLight(0xffffff, 1.2); pl.position.set(10, 10, 10); scene.add(pl);
         camera.position.z = 9;
         animate();
     }
 
     function animate() {
         requestAnimationFrame(animate);
-        if (structure) {
-            structure.rotation.y += 0.001;
-            structure.rotation.x += 0.0004;
-        }
+        if (structure) { structure.rotation.y += 0.001; structure.rotation.x += 0.0004; }
         renderer.render(scene, camera);
     }
 
     let currentSlide = 0;
-    let isNavigating = false;
+    let cooldown = false;
     const slides = document.querySelectorAll('.slide');
 
     function navigateTo(i) {
         if (i >= 13 && !isUnlocked) { currentSlide = 12; updateSlides(); return; }
         currentSlide = i;
         updateSlides();
+        const activeDock = document.getElementById(`dock-${i}`);
+        if (activeDock) activeDock.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
 
     function updateSlides() {
         slides.forEach((slide, idx) => { slide.classList.toggle('active', idx === currentSlide); slide.classList.toggle('prev', idx < currentSlide); });
         document.querySelectorAll('.dock-item').forEach((item, idx) => item.classList.toggle('active', idx === currentSlide));
         document.getElementById('progress').style.width = ((currentSlide + 1) / slides.length) * 100 + '%';
-        if (structure) structure.scale.setScalar(1 + currentSlide * 0.015);
+        if (structure) structure.scale.setScalar(1 + currentSlide * 0.01);
     }
 
     function toggleCheck(el) {
@@ -530,31 +520,26 @@
     function unlockPresentation() {
         isUnlocked = true;
         document.getElementById('unlock-msg').style.opacity = "1";
-        document.getElementById('team-lock-overlay').style.opacity = "0";
-        setTimeout(() => document.getElementById('team-lock-overlay').style.display = "none", 500);
+        document.getElementById('team-lock-overlay').style.display = "none";
         document.querySelectorAll('.dock-item.locked').forEach(item => item.classList.remove('locked'));
     }
 
-    function toggleTheme() { 
-        document.body.classList.toggle('dark');
-        const isDark = document.body.classList.contains('dark');
-        if (structure) { structure.material.color.setHex(isDark ? 0xffffff : 0xcccccc); }
-    }
+    function toggleTheme() { document.body.classList.toggle('dark'); }
 
     async function auditText() {
         const input = document.getElementById('ai-input').value;
         const status = document.getElementById('ai-status');
         const result = document.getElementById('ai-result');
         if (!input) { status.innerText = "Error: Input required"; return; }
-        status.innerText = "✨ Architecting thoughts...";
+        status.innerText = "✨ Architecting...";
         result.classList.add('hidden');
-        const system = "You are a communications expert. Rewrite the user's text into a clear document using the Pyramid Principle (Answer first) and MECE logic. Use bold signposts.";
+        const system = "Rewrite the user text using the Pyramid Principle and MECE logic. Use bold signposts.";
         try {
             const auditRes = await callGemini(input, system);
             result.innerText = auditRes;
             result.classList.remove('hidden');
-            status.innerText = "✨ Structure Audited";
-        } catch (e) { status.innerText = "Error: Server overloaded."; }
+            status.innerText = "✨ Audited";
+        } catch (e) { status.innerText = "Error: Busy"; }
     }
 
     async function callGemini(query, system, retries = 5, delay = 1000) {
@@ -564,7 +549,7 @@
             try {
                 const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 const data = await response.json();
-                return data.candidates?.[0]?.content?.parts?.[0]?.text || "Failed to generate.";
+                return data.candidates?.[0]?.content?.parts?.[0]?.text || "No result.";
             } catch (err) {
                 if (i === retries - 1) throw err;
                 await new Promise(r => setTimeout(r, delay));
@@ -583,16 +568,23 @@
 
     function closeVideo() { document.getElementById('video-modal').style.display = 'none'; document.getElementById('impact-vid').pause(); }
 
-    // FIXED SCROLL CONTROL
-    let cooldown = false;
     window.addEventListener('wheel', (e) => {
         if (Math.abs(e.deltaY) < 40 || cooldown) return;
-        
         cooldown = true;
         if (e.deltaY > 0 && currentSlide < slides.length - 1) navigateTo(currentSlide + 1);
         else if (e.deltaY < 0 && currentSlide > 0) navigateTo(currentSlide - 1);
-        
-        setTimeout(() => { cooldown = false; }, 1000); // 1s wait between slides
+        setTimeout(() => { cooldown = false; }, 1000);
+    }, { passive: true });
+
+    let touchStartY = 0;
+    window.addEventListener('touchstart', (e) => touchStartY = e.touches[0].clientY, { passive: true });
+    window.addEventListener('touchend', (e) => {
+        const touchEndY = e.changedTouches[0].clientY;
+        if (Math.abs(touchStartY - touchEndY) < 50 || cooldown) return;
+        cooldown = true;
+        if (touchStartY > touchEndY && currentSlide < slides.length - 1) navigateTo(currentSlide + 1);
+        else if (touchStartY < touchEndY && currentSlide > 0) navigateTo(currentSlide - 1);
+        setTimeout(() => { cooldown = false; }, 1000);
     }, { passive: true });
 
     document.addEventListener('keydown', (e) => {
