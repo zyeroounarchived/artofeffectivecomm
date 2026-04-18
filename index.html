@@ -494,28 +494,76 @@
     function createMedievalSword() {
         const swordGroup = new THREE.Group();
 
-        const bladeMat = new THREE.MeshStandardMaterial({ color: 0xd8dde6, metalness: 0.9, roughness: 0.22 });
-        const guardMat = new THREE.MeshStandardMaterial({ color: 0x9b6a2f, metalness: 0.8, roughness: 0.3 });
-        const gripMat = new THREE.MeshStandardMaterial({ color: 0x2b2a28, metalness: 0.1, roughness: 0.85 });
-        const pommelMat = new THREE.MeshStandardMaterial({ color: 0x7c8794, metalness: 0.75, roughness: 0.35 });
+        const bladeMat = new THREE.MeshStandardMaterial({ color: 0xdbe2eb, metalness: 0.92, roughness: 0.2 });
+        const fullerMat = new THREE.MeshStandardMaterial({ color: 0xaeb7c4, metalness: 0.85, roughness: 0.28 });
+        const guardMat = new THREE.MeshStandardMaterial({ color: 0x8f6935, metalness: 0.78, roughness: 0.32 });
+        const gripMat = new THREE.MeshStandardMaterial({ color: 0x231f1b, metalness: 0.08, roughness: 0.88 });
+        const pommelMat = new THREE.MeshStandardMaterial({ color: 0x7f8c99, metalness: 0.82, roughness: 0.3 });
 
-        const blade = new THREE.Mesh(new THREE.BoxGeometry(0.16, 3.6, 0.05), bladeMat);
+        const blade = new THREE.Mesh(new THREE.BoxGeometry(0.18, 3.75, 0.055), bladeMat);
         blade.position.y = 0.9;
 
-        const tip = new THREE.Mesh(new THREE.ConeGeometry(0.08, 0.4, 4), bladeMat);
-        tip.position.y = 2.9;
+        const fuller = new THREE.Mesh(new THREE.BoxGeometry(0.045, 2.6, 0.013), fullerMat);
+        fuller.position.set(0, 0.9, 0.03);
+
+        const tip = new THREE.Mesh(new THREE.ConeGeometry(0.09, 0.44, 4), bladeMat);
+        tip.position.y = 3.0;
         tip.rotation.y = Math.PI / 4;
 
-        const guard = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.12, 0.18), guardMat);
-        guard.position.y = -0.95;
+        const guardCore = new THREE.Mesh(new THREE.BoxGeometry(1.35, 0.11, 0.2), guardMat);
+        guardCore.position.y = -1.0;
 
-        const grip = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.09, 1.1, 14), gripMat);
-        grip.position.y = -1.6;
+        const guardLeft = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.08, 0.16), guardMat);
+        guardLeft.position.set(-0.83, -0.95, 0);
+        guardLeft.rotation.z = 0.35;
 
-        const pommel = new THREE.Mesh(new THREE.SphereGeometry(0.14, 16, 16), pommelMat);
-        pommel.position.y = -2.25;
+        const guardRight = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.08, 0.16), guardMat);
+        guardRight.position.set(0.83, -0.95, 0);
+        guardRight.rotation.z = -0.35;
 
-        swordGroup.add(blade, tip, guard, grip, pommel);
+        const ricasso = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.18, 0.075), bladeMat);
+        ricasso.position.y = -0.84;
+
+        const grip = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.1, 1.45, 18), gripMat);
+        grip.position.y = -1.85;
+
+        const wrapCount = 7;
+        const wrapStep = 0.2;
+        for (let i = 0; i < wrapCount; i++) {
+            const wrap = new THREE.Mesh(new THREE.TorusGeometry(0.102, 0.01, 8, 20), guardMat);
+            wrap.rotation.x = Math.PI / 2;
+            wrap.position.y = -1.25 - i * wrapStep;
+            swordGroup.add(wrap);
+        }
+
+        const pommel = new THREE.Mesh(new THREE.OctahedronGeometry(0.17, 0), pommelMat);
+        pommel.position.y = -2.68;
+
+        const pommelCrossV = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.22, 0.03), guardMat);
+        pommelCrossV.position.set(0, -2.68, 0.18);
+        const pommelCrossH = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.03, 0.03), guardMat);
+        pommelCrossH.position.set(0, -2.68, 0.18);
+
+        const hiltCrossV = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.22, 0.03), guardMat);
+        hiltCrossV.position.set(0, -0.98, 0.15);
+        const hiltCrossH = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.03, 0.03), guardMat);
+        hiltCrossH.position.set(0, -0.98, 0.15);
+
+        swordGroup.add(
+            blade,
+            fuller,
+            tip,
+            ricasso,
+            guardCore,
+            guardLeft,
+            guardRight,
+            grip,
+            pommel,
+            pommelCrossV,
+            pommelCrossH,
+            hiltCrossV,
+            hiltCrossH
+        );
         swordGroup.position.set(0, 0, 0);
         swordGroup.rotation.z = 0.08;
 
