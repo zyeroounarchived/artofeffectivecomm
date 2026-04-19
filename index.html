@@ -178,6 +178,54 @@
             background: var(--nav-bg); color: var(--text); border: 1px solid rgba(128, 128, 128, 0.2);
         }
 
+        /* Light-mode contrast fixes for utility-heavy sections */
+        body:not(.dark) .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(0, 0, 0, 0.12);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        body:not(.dark) [class*="bg-black/"] {
+            background: rgba(255, 255, 255, 0.82) !important;
+        }
+
+        body:not(.dark) [class*="bg-zinc-950/"] {
+            background: rgba(255, 255, 255, 0.86) !important;
+        }
+
+        body:not(.dark) [class*="border-white/"] {
+            border-color: rgba(0, 0, 0, 0.14) !important;
+        }
+
+        body:not(.dark) [class*="text-white"],
+        body:not(.dark) [class*="text-zinc-200"],
+        body:not(.dark) [class*="text-zinc-300"],
+        body:not(.dark) [class*="text-zinc-400"],
+        body:not(.dark) [class*="text-zinc-500"] {
+            color: #111827 !important;
+        }
+
+        .checklist-label {
+            color: var(--text);
+        }
+
+        /* Keep the cinematic style, but lift faint text in light mode */
+        body:not(.dark) .slide .opacity-20 { opacity: 0.48 !important; }
+        body:not(.dark) .slide .opacity-30 { opacity: 0.58 !important; }
+        body:not(.dark) .slide .opacity-40 { opacity: 0.66 !important; }
+        body:not(.dark) .slide .opacity-50 { opacity: 0.72 !important; }
+        body:not(.dark) .slide .opacity-60 { opacity: 0.78 !important; }
+        body:not(.dark) .slide .opacity-70 { opacity: 0.84 !important; }
+
+        body:not(.dark) .check-circle {
+            border-color: #4b5563;
+        }
+
+        body:not(.dark) .ai-input::placeholder {
+            color: #4b5563;
+            opacity: 1;
+        }
+
         @media (max-width: 768px) {
             .dock-container { bottom: 1rem; width: 94vw; overflow-x: auto; padding: 10px; gap: 8px; }
             .hero-lockup { transform: scale(0.85); }
@@ -381,19 +429,19 @@
         <div class="space-y-4 w-full">
             <div class="flex items-center gap-6 p-6 glass-card cursor-pointer group shadow-2xl text-left" onclick="toggleCheck(this)">
                 <div class="check-circle group-hover:border-black dark:group-hover:border-white transition-colors"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <p class="text-sm font-black uppercase tracking-widest text-zinc-900 dark:text-zinc-100">Purpose & Audience identified?</p>
+                <p class="text-sm font-black uppercase tracking-widest checklist-label">Purpose & Audience identified?</p>
             </div>
             <div class="flex items-center gap-6 p-6 glass-card cursor-pointer group shadow-2xl text-left" onclick="toggleCheck(this)">
                 <div class="check-circle group-hover:border-black dark:group-hover:border-white transition-colors"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <p class="text-sm font-black uppercase tracking-widest text-zinc-900 dark:text-zinc-100">Conclusion in first paragraph?</p>
+                <p class="text-sm font-black uppercase tracking-widest checklist-label">Conclusion in first paragraph?</p>
             </div>
             <div class="flex items-center gap-6 p-6 glass-card cursor-pointer group shadow-2xl text-left" onclick="toggleCheck(this)">
                 <div class="check-circle group-hover:border-black dark:group-hover:border-white transition-colors"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <p class="text-sm font-black uppercase tracking-widest text-zinc-900 dark:text-zinc-100">Structure MECE & Signposted?</p>
+                <p class="text-sm font-black uppercase tracking-widest checklist-label">Structure MECE & Signposted?</p>
             </div>
             <div class="flex items-center gap-6 p-6 glass-card cursor-pointer group shadow-2xl text-left" onclick="toggleCheck(this)">
                 <div class="check-circle group-hover:border-black dark:group-hover:border-white transition-colors"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4"><path d="M20 6L9 17l-5-5"/></svg></div>
-                <p class="text-sm font-black uppercase tracking-widest text-zinc-900 dark:text-zinc-100">Clear call to action stated?</p>
+                <p class="text-sm font-black uppercase tracking-widest checklist-label">Clear call to action stated?</p>
             </div>
         </div>
         <div id="unlock-msg" class="text-center mt-10 text-[11px] font-black text-emerald-500 uppercase tracking-[0.5em] opacity-0 transition-opacity">Authentication Successful</div>
