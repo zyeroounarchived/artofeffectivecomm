@@ -101,15 +101,11 @@
         }
 
         .slide.active { display: flex; opacity: 1; visibility: visible; transform: translateY(0); z-index: 20; }
+        .slide:not(.active) { display: none !important; }
         .slide.prev { transform: translateX(-50px) scale(0.985); opacity: 0; }
         .slide.next { transform: translateX(50px) scale(0.985); opacity: 0; }
 
-        .slide:not(.active) {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            z-index: 8;
-            pointer-events: none;
-        }
+
 
         .slide:not(#slide-0):not(#slide-15) {
             font-size: 1.08rem;
