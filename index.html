@@ -68,6 +68,22 @@
             z-index: 10;
         }
 
+        .slide::before {
+            content: "";
+            position: absolute;
+            inset: 9% 4% 14%;
+            border-radius: 2.2rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.45s ease;
+            z-index: 0;
+        }
+
+        .slide > * {
+            position: relative;
+            z-index: 1;
+        }
+
         .slide.active { opacity: 1; visibility: visible; transform: translateY(0); }
         .slide.prev { transform: translateY(-40px); opacity: 0; }
 
@@ -209,6 +225,14 @@
             color: var(--text);
         }
 
+        body:not(.dark) .slide.active::before {
+            opacity: 1;
+            background:
+                radial-gradient(120% 80% at 50% 45%, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.58) 55%, rgba(255, 255, 255, 0.24) 100%),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0.10));
+            box-shadow: 0 18px 52px rgba(0, 0, 0, 0.06) inset;
+        }
+
         /* Keep the cinematic style, but lift faint text in light mode */
         body:not(.dark) .slide .opacity-20 { opacity: 0.48 !important; }
         body:not(.dark) .slide .opacity-30 { opacity: 0.58 !important; }
@@ -224,6 +248,29 @@
         body:not(.dark) .ai-input::placeholder {
             color: #4b5563;
             opacity: 1;
+        }
+
+        /* Final Audit slide readability in light mode */
+        body:not(.dark) #slide-12 h2 {
+            color: #111827;
+            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.55);
+        }
+
+        body:not(.dark) #slide-12 .glass-card {
+            background: rgba(255, 255, 255, 0.97) !important;
+            border: 1px solid rgba(17, 24, 39, 0.16);
+            box-shadow: 0 20px 44px rgba(0, 0, 0, 0.10);
+        }
+
+        body:not(.dark) #slide-12 .checklist-label {
+            color: #111827 !important;
+            opacity: 1 !important;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
+        }
+
+        body:not(.dark) #slide-12 .check-circle {
+            border-color: #374151;
+            background: rgba(255, 255, 255, 0.98);
         }
 
         @media (max-width: 768px) {
