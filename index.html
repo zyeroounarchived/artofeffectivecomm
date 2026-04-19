@@ -368,7 +368,7 @@
             <textarea id="ai-input" class="ai-input font-bold" placeholder="Paste messy text here..."></textarea>
             <div class="flex justify-between items-center mt-6">
                 <p id="ai-status" class="text-[10px] font-black uppercase tracking-widest opacity-50">Ready to audit</p>
-                <div class="ai-btn" onclick="auditText()">✨ Audit Structure</div>
+                <div class="ai-btn" onclick="auditText()"> Open in Gemini</div>
             </div>
             <div id="ai-result" class="mt-6 hidden max-h-[160px] overflow-y-auto bg-black text-white p-5 rounded-2xl text-xs leading-relaxed border border-white/20 shadow-inner font-medium"></div>
         </div>
@@ -439,7 +439,6 @@
 
 <script>
     let isUnlocked = false;
-    const apiKey = "AIzaSyCGwh8OYObLhaI9wLaRQiX_va71jcLkPeU";
     
     // Team Array ordered specifically with Nabhya and Adithya first as requested
     const team = [
@@ -770,30 +769,29 @@
         const status = document.getElementById('ai-status');
         const result = document.getElementById('ai-result');
         if (!input) { status.innerText = "Error: Input required"; return; }
-        status.innerText = "✨ Architecting...";
-        result.classList.add('hidden');
         const system = "Rewrite the user text using the Pyramid Principle and MECE logic. Use bold signposts.";
-        try {
-            const auditRes = await callGemini(input, system);
-            result.innerText = auditRes;
-            result.classList.remove('hidden');
-            status.innerText = "✨ Audited";
-        } catch (e) { status.innerText = "Error: API Limit"; }
-    }
 
-    async function callGemini(query, system, retries = 5, delay = 1000) {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-        const payload = { contents: [{ parts: [{ text: query }] }], systemInstruction: { parts: [{ text: system }] } };
-        for (let i = 0; i < retries; i++) {
-            try {
-                const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-                const data = await response.json();
-                return data.candidates?.[0]?.content?.parts?.[0]?.text || "No result.";
-            } catch (err) {
-                if (i === retries - 1) throw err;
-                await new Promise(r => setTimeout(r, delay));
-                delay *= 2;
+        status.innerText = "Opening Gemini...";
+        result.classList.add('hidden');
+
+        const finalPrompt = `${system}\n\nText to rewrite:\n${input}`;
+        const geminiUrl = `https://gemini.google.com/app?prompt=${encodeURIComponent(finalPrompt)}`;
+
+        try {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(finalPrompt);
             }
+
+            window.open(geminiUrl, '_blank', 'noopener');
+
+            result.innerText = "Gemini opened in a new tab. If the prompt does not auto-fill, paste it with Cmd+V (it has been copied).";
+            result.classList.remove('hidden');
+            status.innerText = "Ready in Gemini";
+        } catch (e) {
+            window.open(geminiUrl, '_blank', 'noopener');
+            result.innerText = "Gemini opened in a new tab. If the prompt does not auto-fill, copy your text manually and paste it there.";
+            result.classList.remove('hidden');
+            status.innerText = "Opened Gemini";
         }
     }
 
