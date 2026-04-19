@@ -72,14 +72,15 @@
         .slide {
             position: absolute;
             inset: 0;
-            display: none;
+            display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 6rem 1.5rem 10rem 1.5rem;
             opacity: 0;
+            visibility: hidden;
             pointer-events: none;
-            transition: opacity 0.22s ease;
+            transition: opacity 0.22s ease, visibility 0s linear 0.22s;
             z-index: 10;
             will-change: transform, opacity;
         }
@@ -100,13 +101,13 @@
             z-index: 1;
         }
 
-        .slide.active,
-        .slide.exiting {
-            display: flex;
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            z-index: 20;
+            transition: opacity 0.22s ease;
         }
-
-        .slide.active { opacity: 1; pointer-events: auto; z-index: 20; transition-delay: 0s; }
-        .slide.exiting { opacity: 0; pointer-events: none; z-index: 15; }
 
 
 
@@ -1165,8 +1166,6 @@
     let currentSlide = 0;
     let navDirection = 1;
     let cooldown = false;
-    let exitingSlide = null;
-    let exitTimer = null;
     const slides = document.querySelectorAll('.slide');
     const pollVotes = [0, 0, 0];
     const MAX_VOTES_PER_VISITOR = 3;
@@ -1207,35 +1206,8 @@
     }
 
     function updateSlides() {
-        const previousActive = Array.from(slides).find((slide) => slide.classList.contains('active')) || null;
-        if (exitTimer) {
-            clearTimeout(exitTimer);
-            exitTimer = null;
-        }
-        exitingSlide = null;
         slides.forEach((slide, idx) => {
-            slide.classList.remove('active', 'prev', 'next', 'exiting');
-            if (idx === currentSlide) {
-                slide.classList.add('active');
-                slide.style.display = 'flex';
-            }
-        });
-        if (previousActive && previousActive !== slides[currentSlide]) {
-            previousActive.classList.add('exiting');
-            previousActive.style.display = 'flex';
-            exitingSlide = previousActive;
-            exitTimer = setTimeout(() => {
-                if (exitingSlide) exitingSlide.style.display = 'none';
-                exitingSlide = null;
-                exitTimer = null;
-            }, 240);
-        }
-        slides.forEach((slide, idx) => {
-            if (idx === currentSlide || slide === exitingSlide) {
-                slide.style.display = 'flex';
-            } else {
-                slide.style.display = 'none';
-            }
+            slide.classList.toggle('active', idx === currentSlide);
         });
         document.querySelectorAll('.dock-item').forEach((item, idx) => item.classList.toggle('active', idx === currentSlide));
         document.getElementById('progress').style.width = ((currentSlide + 1) / slides.length) * 100 + '%';
