@@ -1090,7 +1090,7 @@
     let bonusTimer = null;
     let konamiIndex = 0;
     let konamiLastKeyAt = 0;
-    const KONAMI_SEQUENCE = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    const KONAMI_SEQUENCE = ['u', 'd', 'u', 'd', 'l', 'r', 'l', 'r'];
     const DOCK_SECRET_SEQUENCE = [4, 6, 13];
 
     function createMedievalSword() {
@@ -1478,7 +1478,22 @@
     }
 
     function trackKonamiKey(key) {
-        const normalized = key.length === 1 ? key.toLowerCase() : key;
+        const keyMap = {
+            ArrowUp: 'u',
+            ArrowDown: 'd',
+            ArrowLeft: 'l',
+            ArrowRight: 'r',
+            u: 'u',
+            d: 'd',
+            l: 'l',
+            r: 'r'
+        };
+        const raw = key.length === 1 ? key.toLowerCase() : key;
+        const normalized = keyMap[raw] || null;
+        if (!normalized) {
+            konamiIndex = 0;
+            return;
+        }
         const now = performance.now();
         if (now - konamiLastKeyAt > 2600) konamiIndex = 0;
         konamiLastKeyAt = now;
