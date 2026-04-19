@@ -628,7 +628,8 @@
             50% { transform: translateY(-10px) scale(1.08); }
         }
 
-        #bonus-overlay {
+        #bonus-overlay,
+        #meow-overlay {
             position: fixed;
             inset: 0;
             display: none;
@@ -641,7 +642,8 @@
             padding: 1rem;
         }
 
-        #bonus-overlay.open {
+        #bonus-overlay.open,
+        #meow-overlay.open {
             display: flex;
         }
 
@@ -654,6 +656,15 @@
             padding: 1.4rem;
             text-align: center;
             box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+        }
+
+        .bonus-card video {
+            width: 100%;
+            max-height: 56vh;
+            border-radius: 1rem;
+            background: #000;
+            object-fit: contain;
+            margin-top: 0.9rem;
         }
 
         .bonus-close {
@@ -980,15 +991,33 @@
 <div id="bonus-overlay" onclick="if(event.target.id==='bonus-overlay') toggleBonusOverlay(false)">
     <div class="bonus-card">
         <div class="text-[11px] font-black uppercase tracking-[0.35em] opacity-70">Bonus Slide</div>
-        <h3 class="text-2xl font-black mt-4">MECE Meme Unlocked</h3>
-        <p class="text-sm opacity-70 mt-4">When the deck is clean, but one bullet says "misc" and the whole committee stares.</p>
+        <h3 class="text-2xl font-black mt-4">Bonus Reel Unlocked</h3>
+        <video id="bonus-video" controls playsinline preload="metadata">
+            <source src="bonus.mp4" type="video/mp4">
+        </video>
         <p class="text-xs opacity-40 mt-4 uppercase tracking-[0.25em]">Classified Presenter Content</p>
         <div class="ai-btn bonus-close" onclick="toggleBonusOverlay(false)">Close</div>
     </div>
 </div>
 
+<div id="meow-overlay" onclick="if(event.target.id==='meow-overlay') toggleMeowOverlay(false)">
+    <div class="bonus-card">
+        <div class="text-[11px] font-black uppercase tracking-[0.35em] opacity-70">Cat Kiss Mode</div>
+        <h3 class="text-2xl font-black mt-4">Meoww Unlocked</h3>
+        <video id="meow-video" controls playsinline preload="metadata">
+            <source src="meoww.mp4" type="video/mp4">
+        </video>
+        <p class="text-xs opacity-40 mt-4 uppercase tracking-[0.25em]">Secret Cat Kissing Clip</p>
+        <div class="ai-btn bonus-close" onclick="toggleMeowOverlay(false)">Close</div>
+    </div>
+</div>
+
 <audio id="bgm" loop preload="auto">
     <source src="ontop.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="cat-sfx" preload="auto">
+    <source src="mmaahh.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -1079,6 +1108,7 @@
     let catModeTimer = null;
     let catTrailActive = false;
     let catSequence = '';
+    let meowSequence = '';
     let lastCatSpawnAt = 0;
     let touchStartX = 0;
     let swordTapTimes = [];
@@ -1354,8 +1384,39 @@
     function toggleBonusOverlay(forceOpen) {
         const overlay = document.getElementById('bonus-overlay');
         if (!overlay) return;
-        if (typeof forceOpen === 'boolean') overlay.classList.toggle('open', forceOpen);
-        else overlay.classList.toggle('open');
+        const nextOpen = typeof forceOpen === 'boolean' ? forceOpen : !overlay.classList.contains('open');
+        overlay.classList.toggle('open', nextOpen);
+
+        const bonusVideo = document.getElementById('bonus-video');
+        if (bonusVideo) {
+            if (nextOpen) {
+                bonusVideo.currentTime = 0;
+                const playPromise = bonusVideo.play();
+                if (playPromise !== undefined) playPromise.catch(() => {});
+            } else {
+                bonusVideo.pause();
+                bonusVideo.currentTime = 0;
+            }
+        }
+    }
+
+    function toggleMeowOverlay(forceOpen) {
+        const overlay = document.getElementById('meow-overlay');
+        if (!overlay) return;
+        const nextOpen = typeof forceOpen === 'boolean' ? forceOpen : !overlay.classList.contains('open');
+        overlay.classList.toggle('open', nextOpen);
+
+        const meowVideo = document.getElementById('meow-video');
+        if (meowVideo) {
+            if (nextOpen) {
+                meowVideo.currentTime = 0;
+                const playPromise = meowVideo.play();
+                if (playPromise !== undefined) playPromise.catch(() => {});
+            } else {
+                meowVideo.pause();
+                meowVideo.currentTime = 0;
+            }
+        }
     }
 
     function revealBonusDockIcon() {
@@ -1470,6 +1531,12 @@
         animationsPaused = false;
         catTrailActive = true;
         showToast('cat mode');
+        const catSfx = document.getElementById('cat-sfx');
+        if (catSfx) {
+            catSfx.currentTime = 0;
+            const playPromise = catSfx.play();
+            if (playPromise !== undefined) playPromise.catch(() => {});
+        }
         if (catModeTimer) clearTimeout(catModeTimer);
         catModeTimer = setTimeout(() => {
             catTrailActive = false;
@@ -2043,6 +2110,29 @@
         }
         if (catSequenceConsumesKey) return;
 
+        let meowSequenceConsumesKey = false;
+        if (/^[a-z]$/i.test(e.key)) {
+            const nextMeowSequence = (meowSequence + e.key.toUpperCase()).slice(-4);
+            meowSequence = nextMeowSequence;
+            if (
+                nextMeowSequence === 'M' ||
+                nextMeowSequence === 'ME' ||
+                nextMeowSequence === 'MEO' ||
+                nextMeowSequence === 'MEOW'
+            ) {
+                meowSequenceConsumesKey = true;
+            }
+            if (meowSequence === 'MEOW') {
+                meowSequence = '';
+                showToast('cat kiss mode');
+                toggleMeowOverlay(true);
+                meowSequenceConsumesKey = true;
+            }
+        } else {
+            meowSequence = '';
+        }
+        if (meowSequenceConsumesKey) return;
+
         if (e.key === 'ArrowRight' || e.key === ' ') navigateTo(currentSlide + 1);
         if (e.key === 'ArrowLeft') navigateTo(currentSlide - 1);
         if (e.key === 'Home') navigateTo(0);
@@ -2057,7 +2147,11 @@
             const n = Number(raw);
             if (!Number.isNaN(n)) navigateTo(n - 1);
         }
-        if (e.key === 'Escape') togglePresenterPalette(false);
+        if (e.key === 'Escape') {
+            togglePresenterPalette(false);
+            toggleBonusOverlay(false);
+            toggleMeowOverlay(false);
+        }
     });
 
     document.addEventListener('mousemove', (e) => {
