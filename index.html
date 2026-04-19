@@ -1217,6 +1217,7 @@
             slide.classList.remove('active', 'prev', 'next', 'exiting');
             if (idx === currentSlide) {
                 slide.classList.add('active');
+                slide.style.display = 'flex';
             }
         });
         if (previousActive && previousActive !== slides[currentSlide]) {
@@ -1230,7 +1231,9 @@
             }, 240);
         }
         slides.forEach((slide, idx) => {
-            if (idx !== currentSlide && slide !== exitingSlide) {
+            if (idx === currentSlide || slide === exitingSlide) {
+                slide.style.display = 'flex';
+            } else {
                 slide.style.display = 'none';
             }
         });
@@ -1246,7 +1249,7 @@
     function toggleCheck(el) {
         el.querySelector('.check-circle').classList.toggle('checked');
         updateAuditProgress();
-        if (document.querySelectorAll('.check-circle.checked').length === 4) unlockPresentation();
+        if (document.querySelectorAll('#slide-13 .check-circle.checked').length === 4) unlockPresentation();
     }
 
     function updateAuditProgress() {
@@ -1286,9 +1289,14 @@
             sword.traverse(c => {
                 if (c.isMesh && c.material && c.material.color) {
                     c.material.color.setHex(swordColor);
-                    if (!isDark && typeof c.material.emissive !== 'undefined' && c.material.emissive) {
-                        c.material.emissive.setHex(0x0f172a);
-                        c.material.emissiveIntensity = 0.22;
+                    if (typeof c.material.emissive !== 'undefined' && c.material.emissive) {
+                        if (!isDark) {
+                            c.material.emissive.setHex(0x0f172a);
+                            c.material.emissiveIntensity = 0.22;
+                        } else {
+                            c.material.emissive.setHex(0x000000);
+                            c.material.emissiveIntensity = 0;
+                        }
                     }
                 }
             });
@@ -1513,8 +1521,38 @@
     fadeBgm(true); // fade bgm back in
 }
 
+    function isTypingTarget(target) {
+        if (!target) return false;
+        const tag = target.tagName;
+        return tag === 'INPUT' || tag === 'TEXTAREA' || target.isContentEditable || !!target.closest('[contenteditable="true"]');
+    }
+
+    function getScrollableParent(target) {
+        let node = target;
+        while (node && node !== document.body) {
+            if (node instanceof HTMLElement) {
+                const style = window.getComputedStyle(node);
+                const canScrollY = /auto|scroll/.test(style.overflowY) && node.scrollHeight > node.clientHeight;
+                if (canScrollY) return node;
+            }
+            node = node.parentElement;
+        }
+        return null;
+    }
+
+    function shouldHandleWheelNavigation(e) {
+        const scrollParent = getScrollableParent(e.target);
+        if (!scrollParent) return true;
+        const atTop = scrollParent.scrollTop <= 0;
+        const atBottom = scrollParent.scrollTop + scrollParent.clientHeight >= scrollParent.scrollHeight - 1;
+        if (e.deltaY > 0 && !atBottom) return false;
+        if (e.deltaY < 0 && !atTop) return false;
+        return true;
+    }
+
     // Hard Cooldown on Scroll
     window.addEventListener('wheel', (e) => {
+        if (!shouldHandleWheelNavigation(e)) return;
         if (Math.abs(e.deltaY) < 50 || cooldown) return;
         cooldown = true;
         if (e.deltaY > 0 && currentSlide < slides.length - 1) navigateTo(currentSlide + 1);
@@ -1523,9 +1561,19 @@
     }, { passive: true });
 
     let touchStartY = 0;
-    window.addEventListener('touchstart', (e) => touchStartY = e.touches[0].clientY, { passive: true });
+    let touchScrollableParent = null;
+    window.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+        touchScrollableParent = getScrollableParent(e.target);
+    }, { passive: true });
     window.addEventListener('touchend', (e) => {
         const touchEndY = e.changedTouches[0].clientY;
+        if (touchScrollableParent) {
+            const atTop = touchScrollableParent.scrollTop <= 0;
+            const atBottom = touchScrollableParent.scrollTop + touchScrollableParent.clientHeight >= touchScrollableParent.scrollHeight - 1;
+            if (touchStartY > touchEndY && !atBottom) return;
+            if (touchStartY < touchEndY && !atTop) return;
+        }
         if (Math.abs(touchStartY - touchEndY) < 60 || cooldown) return;
         cooldown = true;
         if (touchStartY > touchEndY && currentSlide < slides.length - 1) navigateTo(currentSlide + 1);
@@ -1534,6 +1582,7 @@
     }, { passive: true });
 
     document.addEventListener('keydown', (e) => {
+        if (isTypingTarget(e.target)) return;
         if (e.key === 'ArrowRight' || e.key === ' ') navigateTo(currentSlide + 1);
         if (e.key === 'ArrowLeft') navigateTo(currentSlide - 1);
         if (e.key === 'Home') navigateTo(0);
