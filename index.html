@@ -219,7 +219,34 @@
             text-shadow: 0 2px 14px rgba(0, 0, 0, 0.3);
             letter-spacing: 0.06em;
             margin-bottom: 1.1rem !important;
+            text-wrap: balance;
+            max-width: 18ch;
+            margin-left: auto;
+            margin-right: auto;
         }
+
+        .slide:not(#slide-0) h2[class*="text-xs"] {
+            font-size: clamp(0.98rem, 1.15vw, 1.2rem) !important;
+            letter-spacing: 0.2em !important;
+            opacity: 0.86 !important;
+        }
+
+        .slide:not(#slide-0) h3,
+        .slide:not(#slide-0) h4 {
+            text-wrap: balance;
+        }
+
+        .slide:not(#slide-0) p {
+            max-width: 68ch;
+            line-height: 1.52;
+        }
+
+        .dark .slide:not(#slide-0) .opacity-20 { opacity: 0.42 !important; }
+        .dark .slide:not(#slide-0) .opacity-30 { opacity: 0.56 !important; }
+        .dark .slide:not(#slide-0) .opacity-40 { opacity: 0.68 !important; }
+        .dark .slide:not(#slide-0) .opacity-50 { opacity: 0.76 !important; }
+        .dark .slide:not(#slide-0) .opacity-60 { opacity: 0.82 !important; }
+        .dark .slide:not(#slide-0) .opacity-70 { opacity: 0.88 !important; }
 
         /* Keep dense content left-aligned where scanning is faster */
         #slide-5 ul,
@@ -381,6 +408,95 @@
             line-height: 1.55;
         }
 
+        /* Slide-specific layout fix: prevent title/card collisions on Design slide */
+        #slide-8 > div {
+            max-width: min(1240px, 94vw) !important;
+            gap: clamp(2rem, 4vw, 4.5rem) !important;
+            align-items: center !important;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr) !important;
+        }
+
+        #slide-8 h2 {
+            text-align: left !important;
+            font-size: clamp(3rem, 5.6vw, 5.1rem) !important;
+            line-height: 0.92 !important;
+            letter-spacing: -0.02em !important;
+            max-width: 8.8ch;
+            margin-bottom: 0.3rem !important;
+            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.38);
+        }
+
+        #slide-8 h2 span {
+            display: block;
+            font-size: clamp(3.2rem, 6.2vw, 5.4rem);
+            line-height: 0.9;
+        }
+
+        #slide-8 .grid.grid-cols-2 {
+            width: min(100%, 31rem);
+            justify-self: center;
+        }
+
+        #slide-8 .grid.grid-cols-2 .glass-card {
+            min-height: 9.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 0.12em;
+        }
+
+        #slide-8 p {
+            text-align: center !important;
+            max-width: 52rem;
+            opacity: 0.82 !important;
+        }
+
+        /* Slide-specific layout fix: professional pyramid slide hierarchy */
+        #slide-4 {
+            padding-top: 5.4rem;
+            justify-content: center;
+        }
+
+        #slide-4 h2 {
+            font-size: clamp(1.05rem, 1.25vw, 1.24rem) !important;
+            letter-spacing: 0.24em !important;
+            opacity: 0.9 !important;
+            margin-bottom: 1.3rem !important;
+            max-width: 28ch;
+        }
+
+        #slide-4 > div > p {
+            font-size: clamp(1.08rem, 1.42vw, 1.32rem) !important;
+            max-width: 54ch;
+            opacity: 0.84 !important;
+        }
+
+        #slide-4 .w-full.max-w-sm.glass-card {
+            width: min(100%, 28rem);
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        #slide-4 .w-full.max-w-sm.glass-card h3 {
+            font-size: clamp(1.55rem, 2.1vw, 2.2rem) !important;
+            letter-spacing: 0.12em !important;
+        }
+
+        #slide-4 .grid.grid-cols-2 {
+            width: min(100%, 50rem);
+            gap: 1rem;
+            opacity: 1;
+        }
+
+        #slide-4 .grid.grid-cols-2 .glass-card {
+            min-height: 5.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(0.96rem, 1.1vw, 1.12rem) !important;
+            letter-spacing: 0.08em;
+        }
+
         #bg-canvas {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 0; pointer-events: none; display: block;
@@ -537,6 +653,34 @@
             position: fixed; top: 2rem; right: 2rem; z-index: 1000; cursor: pointer;
             width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
             background: var(--nav-bg); color: var(--text); border: 1px solid rgba(128, 128, 128, 0.2);
+        }
+
+        .sound-toggle {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            cursor: pointer;
+            min-width: 102px;
+            height: 40px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 0.9rem;
+            background: var(--nav-bg);
+            color: var(--text);
+            border: 1px solid rgba(128, 128, 128, 0.2);
+            font-size: 0.62rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .sound-toggle:hover {
+            transform: translateY(-1px);
+            opacity: 0.9;
         }
 
         body.hide-dock .dock-container {
@@ -972,6 +1116,10 @@
             .hero-lockup { transform: scale(0.85); }
             .slide { padding: 4rem 1.5rem 8rem 1.5rem; }
             .grid { grid-template-columns: 1fr !important; }
+            .sound-toggle { top: 1rem; left: 1rem; min-width: 90px; height: 36px; font-size: 0.56rem; }
+            #slide-8 h2 { text-align: center !important; max-width: 100%; }
+            #slide-8 .grid.grid-cols-2 { width: min(100%, 24rem); }
+            #slide-4 .grid.grid-cols-2 { width: min(100%, 24rem); }
         }
     </style>
 </head>
@@ -990,6 +1138,8 @@
 <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Theme">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
 </div>
+
+<button id="sound-toggle" class="sound-toggle" onclick="toggleBgm()">Sound On</button>
 
 <!-- Slides 0-14 -->
 <div class="slide" id="slide-0">
@@ -2538,8 +2688,16 @@
     });
 
     const bgm = document.getElementById('bgm');
+    const soundToggle = document.getElementById('sound-toggle');
     bgm.volume = 0;
-    const TARGET_VOLUME = 0.16;
+    bgm.preload = 'auto';
+    const TARGET_VOLUME = 0.3;
+    let bgmStarted = false;
+
+    function setSoundToggleLabel() {
+        if (!soundToggle) return;
+        soundToggle.textContent = bgmStarted && !bgm.paused ? 'Sound Off' : 'Sound On';
+    }
 
     function fadeBgm(fadeIn, duration = 1500) {
         const start = bgm.volume;
@@ -2553,17 +2711,53 @@
         requestAnimationFrame(step);
     }
 
+    async function startBgmFromGesture() {
+        try {
+            if (!bgmStarted) {
+                bgm.load();
+                await bgm.play();
+                bgmStarted = true;
+            } else if (bgm.paused) {
+                await bgm.play();
+            }
+            fadeBgm(true, 900);
+            setSoundToggleLabel();
+            return true;
+        } catch (_) {
+            setSoundToggleLabel();
+            return false;
+        }
+    }
+
+    function toggleBgm() {
+        if (!bgmStarted || bgm.paused) {
+            startBgmFromGesture();
+            return;
+        }
+        fadeBgm(false, 400);
+        setTimeout(() => {
+            bgm.pause();
+            setSoundToggleLabel();
+        }, 420);
+    }
+
     // Start BGM on first user interaction (browser autoplay policy)
     function startBgm() {
-        bgm.play().then(() => fadeBgm(true)).catch(() => {});
-        document.removeEventListener('click', startBgm);
-        document.removeEventListener('keydown', startBgm);
-        document.removeEventListener('touchstart', startBgm);
+        startBgmFromGesture().then((started) => {
+            if (!started) return;
+            document.removeEventListener('click', startBgm);
+            document.removeEventListener('keydown', startBgm);
+            document.removeEventListener('touchstart', startBgm);
+        });
     }
 
     document.addEventListener('click', startBgm);
     document.addEventListener('keydown', startBgm);
     document.addEventListener('touchstart', startBgm);
+    bgm.addEventListener('ended', () => setSoundToggleLabel());
+    bgm.addEventListener('pause', () => setSoundToggleLabel());
+    bgm.addEventListener('play', () => setSoundToggleLabel());
+    setSoundToggleLabel();
 </script>
 </body>
 </html>
