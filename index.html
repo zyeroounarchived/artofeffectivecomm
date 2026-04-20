@@ -194,6 +194,25 @@
             justify-content: space-between;
         }
 
+        #slide-16 .doc-compare-card h3 {
+            color: #f8fafc;
+            font-size: clamp(1.45rem, 1.8vw, 1.75rem);
+            line-height: 1.15;
+        }
+
+        #slide-16 .doc-compare-card p {
+            color: #e7edf6;
+            font-size: clamp(1rem, 1.05vw, 1.08rem);
+            line-height: 1.5;
+        }
+
+        #slide-16 .doc-compare-card ul,
+        #slide-16 .doc-compare-card li {
+            color: #f1f5f9;
+            font-size: clamp(1rem, 1.04vw, 1.08rem);
+            line-height: 1.45;
+        }
+
         #slide-16 .doc-compare-bad {
             background: linear-gradient(160deg, rgba(30, 16, 20, 0.95), rgba(19, 19, 21, 0.95)) !important;
             border-color: rgba(168, 134, 142, 0.45) !important;
@@ -256,6 +275,16 @@
             width: 100%;
             text-align: center;
             max-width: 52rem;
+        }
+
+        #slide-16 .verdict-card p:first-of-type {
+            font-size: clamp(1.2rem, 1.35vw, 1.45rem) !important;
+            line-height: 1.38;
+        }
+
+        #slide-16 .verdict-card p:last-of-type {
+            font-size: clamp(0.98rem, 1.02vw, 1.06rem) !important;
+            line-height: 1.55;
         }
 
         #bg-canvas {
@@ -597,6 +626,14 @@
         body:not(.dark) #slide-5 .glass-card:last-child ul,
         body:not(.dark) #slide-5 .glass-card:last-child li {
             color: #f8fafc !important;
+        }
+
+        body:not(.dark) #slide-16 .doc-compare-card h3,
+        body:not(.dark) #slide-16 .doc-compare-card p,
+        body:not(.dark) #slide-16 .doc-compare-card ul,
+        body:not(.dark) #slide-16 .doc-compare-card li,
+        body:not(.dark) #slide-16 .doc-compare-card [class*="text-zinc-"] {
+            color: #f3f4f6 !important;
         }
 
         .checklist-label {
