@@ -571,9 +571,9 @@
             width: min(96vw, 980px);
             border-radius: 2.1rem;
             padding: clamp(1.6rem, 3.3vw, 2.8rem);
-            border: 1px solid rgba(200, 214, 236, 0.22);
-            background: linear-gradient(165deg, rgba(8, 11, 20, 0.74), rgba(8, 10, 16, 0.56));
-            box-shadow: 0 34px 80px rgba(0, 0, 0, 0.34);
+            border: 0;
+            background: transparent;
+            box-shadow: none;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -607,24 +607,11 @@
         }
 
         #slide-15 .end-meta {
-            width: 100%;
-            margin-top: 0.5rem;
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 0.65rem;
+            display: none;
         }
 
         #slide-15 .end-pill {
-            border-radius: 999px;
-            border: 1px solid rgba(220, 230, 246, 0.24);
-            background: rgba(11, 14, 22, 0.44);
-            font-size: clamp(0.66rem, 0.84vw, 0.76rem);
-            font-weight: 900;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            padding: 0.56rem 0.9rem;
-            opacity: 0.7;
-            text-align: center;
+            display: none;
         }
 
         /* Flow GPS readability pass: larger type and stronger card sizing */
@@ -1397,9 +1384,9 @@
         }
 
         body:not(.dark) #slide-15 .endframe {
-            background: linear-gradient(165deg, rgba(255, 255, 255, 0.97), rgba(243, 247, 255, 0.94));
-            border: 1px solid rgba(15, 23, 42, 0.14);
-            box-shadow: 0 28px 64px rgba(15, 23, 42, 0.14);
+            background: transparent;
+            border: 0;
+            box-shadow: none;
         }
 
         body:not(.dark) #slide-15 .end-kicker,
@@ -1408,11 +1395,6 @@
             color: #1e293b;
             opacity: 1;
             text-shadow: none;
-        }
-
-        body:not(.dark) #slide-15 .end-pill {
-            background: rgba(255, 255, 255, 0.78);
-            border-color: rgba(15, 23, 42, 0.16);
         }
 
         /* Emergency light-mode readability lock (must stay near end so it wins) */
@@ -1975,10 +1957,6 @@
         <p class="end-kicker">Structure defines clarity</p>
         <h2 id="impact-text" class="text-7xl md:text-[12rem] font-black italic font-serif tracking-tighter leading-none cursor-pointer hover:opacity-70 transition-all drop-shadow-2xl" onclick="playImpact()">IMPACT.</h2>
         <p class="end-subline">When structure is intentional, decisions happen faster and execution follows with confidence.</p>
-        <div class="end-meta">
-            <div class="end-pill">2026 Edition</div>
-            <div class="end-pill">Thank You</div>
-        </div>
     </div>
 </div>
 
