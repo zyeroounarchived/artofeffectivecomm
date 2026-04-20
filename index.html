@@ -606,6 +606,12 @@
             filter: contrast(1.18) saturate(0.96) brightness(1.08);
         }
 
+        body:not(.dark)[data-slide="2"] #bg-canvas,
+        body:not(.dark)[data-slide="7"] #bg-canvas {
+            opacity: 0.14;
+            filter: contrast(0.9) saturate(0.66) brightness(0.88) blur(1px);
+        }
+
         body:not(.dark)[data-slide="7"] #bg-canvas {
             opacity: 0.16;
             filter: contrast(0.92) saturate(0.74) brightness(0.9) blur(0.9px);
@@ -966,6 +972,25 @@
             color: #111827 !important;
             opacity: 1 !important;
             text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+        }
+
+        /* Global light-mode readability lock for body copy and small labels */
+        body:not(.dark) .slide:not(#slide-0):not(#slide-1):not(#slide-15) h3,
+        body:not(.dark) .slide:not(#slide-0):not(#slide-1):not(#slide-15) h4 {
+            color: #0f172a !important;
+            opacity: 1 !important;
+            text-shadow: none !important;
+        }
+
+        body:not(.dark) .slide:not(#slide-0):not(#slide-1):not(#slide-15) p,
+        body:not(.dark) .slide:not(#slide-0):not(#slide-1):not(#slide-15) [class*="text-zinc-"] {
+            color: #334155 !important;
+            opacity: 1 !important;
+            text-shadow: none !important;
+        }
+
+        body:not(.dark) .slide:not(#slide-0):not(#slide-1):not(#slide-15) [class*="opacity-"] {
+            opacity: 1 !important;
         }
 
         body:not(.dark) #slide-5 .glass-card:first-child p,
