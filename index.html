@@ -138,6 +138,38 @@
             font-size: clamp(1.34rem, 1.9vw, 1.52rem) !important;
         }
 
+        /* Readability tuning for dense comparison slides */
+        #slide-5 .glass-card {
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        #slide-5 .glass-card:first-child {
+            background: rgba(10, 10, 12, 0.96) !important;
+            border-color: rgba(168, 134, 142, 0.5) !important;
+        }
+
+        #slide-5 .glass-card:last-child {
+            background: linear-gradient(120deg, rgba(20, 28, 26, 0.96), rgba(28, 32, 31, 0.94)) !important;
+            border-color: rgba(169, 196, 189, 0.45) !important;
+        }
+
+        #slide-16 .doc-compare-card {
+            backdrop-filter: blur(26px);
+            -webkit-backdrop-filter: blur(26px);
+            min-height: 25rem;
+        }
+
+        #slide-16 .doc-compare-bad {
+            background: linear-gradient(160deg, rgba(30, 16, 20, 0.95), rgba(19, 19, 21, 0.95)) !important;
+            border-color: rgba(168, 134, 142, 0.45) !important;
+        }
+
+        #slide-16 .doc-compare-good {
+            background: linear-gradient(160deg, rgba(18, 30, 26, 0.95), rgba(19, 22, 24, 0.94)) !important;
+            border-color: rgba(169, 196, 189, 0.45) !important;
+        }
+
         #bg-canvas {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 0; pointer-events: none; display: block;
@@ -964,37 +996,37 @@
 
 <div class="slide" id="slide-16">
     <div class="max-w-6xl w-full px-6 md:px-10">
-        <h2 class="text-xs font-black tracking-[0.55em] uppercase opacity-30 text-center mb-10">PDF Comparison</h2>
+        <h2 class="text-xs font-black tracking-[0.55em] uppercase opacity-40 text-center mb-10">Document Quality Comparison</h2>
         <div class="grid md:grid-cols-2 gap-8">
-            <div class="glass-card border-t-4 border-zinc-700 shadow-2xl">
-                <p class="text-[10px] font-black uppercase tracking-[0.25em] opacity-50 mb-4">PDF A</p>
-                <h3 class="text-2xl font-black uppercase tracking-tight mb-3">Document 1</h3>
-                <p class="text-sm opacity-80 leading-relaxed mb-6">Use this panel to summarize the first PDF: objective, key findings, and recommendation.</p>
-                <ul class="space-y-3 text-sm font-semibold opacity-85">
-                    <li>Executive Summary: Clear but broad framing</li>
-                    <li>Evidence Depth: Strong data appendix</li>
-                    <li>Readability: Moderate scannability</li>
-                    <li>Decision Readiness: Needs tighter conclusions</li>
+            <div class="glass-card doc-compare-card doc-compare-bad border-t-4 shadow-2xl">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-rose-400 mb-4">Bad Document</p>
+                <h3 class="text-2xl font-black uppercase tracking-tight mb-3">Needs Rework</h3>
+                <p class="text-sm text-zinc-200 leading-relaxed mb-6">Dense writing and delayed conclusions make the document hard to scan and slow to act on.</p>
+                <ul class="space-y-3 text-sm font-semibold text-zinc-100">
+                    <li>No clear conclusion at the top</li>
+                    <li>Ideas overlap across sections</li>
+                    <li>Long paragraphs with weak headings</li>
+                    <li>Action items are vague or missing</li>
                 </ul>
             </div>
 
-            <div class="glass-card border-t-4 border-emerald-500/40 bg-emerald-500/5 shadow-2xl">
-                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-emerald-500 mb-4">PDF B</p>
-                <h3 class="text-2xl font-black uppercase tracking-tight mb-3">Document 2</h3>
-                <p class="text-sm opacity-85 leading-relaxed mb-6">Use this panel to summarize the second PDF against the same criteria for a direct comparison.</p>
-                <ul class="space-y-3 text-sm font-semibold opacity-90">
-                    <li>Executive Summary: Direct and decision-first</li>
-                    <li>Evidence Depth: Focused, less exhaustive</li>
-                    <li>Readability: High visual hierarchy</li>
-                    <li>Decision Readiness: Clear call to action</li>
+            <div class="glass-card doc-compare-card doc-compare-good border-t-4 shadow-2xl">
+                <p class="text-[10px] font-black uppercase tracking-[0.25em] text-emerald-400 mb-4">Good Document</p>
+                <h3 class="text-2xl font-black uppercase tracking-tight mb-3">Ready to Present</h3>
+                <p class="text-sm text-zinc-100 leading-relaxed mb-6">Decision-first structure and clear signposting make the document easy to understand in one pass.</p>
+                <ul class="space-y-3 text-sm font-semibold text-zinc-50">
+                    <li>Conclusion is visible in the first paragraph</li>
+                    <li>MECE sections with no overlap</li>
+                    <li>Strong headings and clean spacing</li>
+                    <li>Concrete recommendation and next steps</li>
                 </ul>
             </div>
         </div>
 
         <div class="glass-card mt-8 border-l-4 border-zinc-700 shadow-2xl">
-            <h4 class="text-[10px] font-black uppercase tracking-[0.35em] opacity-50 mb-4">At-a-Glance Verdict</h4>
-            <p class="text-base md:text-lg font-black leading-relaxed">PDF B is faster to act on; PDF A is stronger for deep due diligence.</p>
-            <p class="text-sm opacity-70 mt-4">Tip: keep this slide after your methodology section to show how structure quality changes decision speed.</p>
+            <h4 class="text-[10px] font-black uppercase tracking-[0.35em] opacity-60 mb-4">At-a-Glance Verdict</h4>
+            <p class="text-base md:text-lg font-black leading-relaxed">The good document communicates decisions faster and reduces reader confusion.</p>
+            <p class="text-sm opacity-80 mt-4">Use this slide to show how structure quality directly affects execution speed.</p>
         </div>
     </div>
 </div>
@@ -1091,7 +1123,7 @@
         { name: "Radhika Agarwal", color: "#10b981", url: "https://www.linkedin.com/in/", isNabhya: false },
         { name: "Aradhya Urvi", color: "#8b5cf6", url: "https://www.linkedin.com/in/aradhya-urvi-026ba7395/", isNabhya: false },
         { name: "Moksh Badala", color: "#f59e0b", url: "https://www.linkedin.com/in/moksh-badala-853a0a3a6/", isNabhya: false },
-        { name: "Liesha Raut", color: "#ef4444", url: "https://www.linkedin.com/in/leisha-raut-27a81b315/", isNabhya: false }
+        { name: "Leisha Raut", color: "#ef4444", url: "https://www.linkedin.com/in/leisha-raut-27a81b315/", isNabhya: false }
     ];
 
     const grid = document.getElementById('presenter-grid');
