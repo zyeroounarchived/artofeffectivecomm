@@ -169,6 +169,22 @@
             border-color: rgba(169, 196, 189, 0.45) !important;
         }
 
+        #slide-5 .glass-card:last-child h3,
+        #slide-5 .glass-card:last-child h4,
+        #slide-5 .glass-card:last-child ul,
+        #slide-5 .glass-card:last-child li {
+            color: #ecfdf5 !important;
+        }
+
+        #slide-5 .glass-card:last-child .bg-emerald-500 {
+            background-color: #9fe6cf !important;
+        }
+
+        #slide-5 .glass-card:first-child h4,
+        #slide-5 .glass-card:first-child p {
+            color: #f8fafc !important;
+        }
+
         #slide-16 .doc-compare-card {
             backdrop-filter: blur(26px);
             -webkit-backdrop-filter: blur(26px);
@@ -230,9 +246,15 @@
             justify-content: center;
             border-left-width: 0 !important;
             border-top: 1px solid var(--surface-border);
+            width: min(100%, 58rem) !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
         }
 
+        #slide-16 .verdict-card h4,
         #slide-16 .verdict-card p {
+            width: 100%;
+            text-align: center;
             max-width: 52rem;
         }
 
@@ -566,6 +588,15 @@
         body:not(.dark) [class*="text-zinc-400"],
         body:not(.dark) [class*="text-zinc-500"] {
             color: #111827 !important;
+        }
+
+        body:not(.dark) #slide-5 .glass-card:first-child p,
+        body:not(.dark) #slide-5 .glass-card:first-child h4,
+        body:not(.dark) #slide-5 .glass-card:last-child h3,
+        body:not(.dark) #slide-5 .glass-card:last-child h4,
+        body:not(.dark) #slide-5 .glass-card:last-child ul,
+        body:not(.dark) #slide-5 .glass-card:last-child li {
+            color: #f8fafc !important;
         }
 
         .checklist-label {
