@@ -543,11 +543,47 @@
         }
 
         #slide-15 #impact-text {
-            font-size: clamp(8.6rem, 24vw, 21rem) !important;
-            line-height: 0.78 !important;
-            letter-spacing: -0.04em !important;
-            max-width: none !important;
-            text-wrap: nowrap;
+            font-size: clamp(5.4rem, 13.8vw, 11.2rem) !important;
+            line-height: 0.82 !important;
+            letter-spacing: -0.03em !important;
+            max-width: 96vw !important;
+        }
+
+        /* Flow GPS readability pass: larger type and stronger card sizing */
+        #slide-7 > div {
+            width: min(96vw, 1200px);
+        }
+
+        #slide-7 h2 {
+            font-size: clamp(1.18rem, 1.8vw, 1.55rem) !important;
+            letter-spacing: 0.2em !important;
+            margin-bottom: 1.5rem !important;
+        }
+
+        #slide-7 > div > p {
+            font-size: clamp(1.2rem, 1.7vw, 1.5rem) !important;
+            line-height: 1.45;
+            max-width: 54rem;
+        }
+
+        #slide-7 .grid {
+            gap: 1rem !important;
+            margin-top: 0.6rem;
+        }
+
+        #slide-7 .grid .glass-card {
+            min-height: 8.1rem;
+            font-size: clamp(1.2rem, 1.85vw, 1.62rem) !important;
+            letter-spacing: 0.08em !important;
+            border-radius: 2rem;
+        }
+
+        #slide-7 .mt-20 {
+            margin-top: 2.2rem !important;
+            max-width: min(94vw, 68rem) !important;
+            padding: 2rem 2.2rem !important;
+            font-size: clamp(1.38rem, 2.1vw, 1.9rem) !important;
+            line-height: 1.35 !important;
         }
 
         /* Slide-specific layout fix: professional pyramid slide hierarchy */
@@ -1481,6 +1517,9 @@
             #slide-4 .grid.grid-cols-2 { width: min(100%, 24rem); }
             #slide-3 h2 { text-align: center !important; max-width: 100%; }
             #slide-3 > div { gap: 1.4rem !important; }
+            #slide-7 .grid .glass-card { min-height: 6.6rem; font-size: clamp(1.05rem, 5.2vw, 1.3rem) !important; }
+            #slide-7 .mt-20 { font-size: clamp(1.08rem, 4.8vw, 1.34rem) !important; padding: 1.35rem 1.2rem !important; }
+            #slide-15 #impact-text { font-size: clamp(4.2rem, 20vw, 6.8rem) !important; }
         }
     </style>
 </head>
@@ -1836,6 +1875,7 @@
         <div class="text-[11px] font-black uppercase tracking-[0.35em] opacity-70 mb-3">Presenter Controls</div>
         <div class="palette-row"><span class="palette-key">P</span><span>Open or close this control panel</span></div>
         <div class="palette-row"><span class="palette-key">T</span><span>Toggle theme</span></div>
+        <div class="palette-row"><span class="palette-key">Shift + M</span><span>Toggle music on or off</span></div>
         <div class="palette-row"><span class="palette-key">D</span><span>Hide or show dock</span></div>
         <div class="palette-row"><span class="palette-key">A</span><span>Pause or resume background animation</span></div>
         <div class="palette-row"><span class="palette-key">G</span><span>Jump to a specific slide</span></div>
@@ -2959,6 +2999,13 @@
 
     document.addEventListener('keydown', (e) => {
         if (isTypingTarget(e.target)) return;
+
+        if (e.shiftKey && e.key.toLowerCase() === 'm') {
+            e.preventDefault();
+            toggleBgm();
+            return;
+        }
+
         trackKonamiKey(e.key);
         trackThemeStreak(e.key);
         trackDockDiscoKey(e.key);
