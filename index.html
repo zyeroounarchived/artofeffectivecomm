@@ -168,7 +168,7 @@
 
 
         .slide:not(#slide-0) {
-            font-size: 1.26rem;
+            font-size: 1.04rem;
         }
 
         .slide:not(#slide-0) .text-xs,
@@ -176,36 +176,41 @@
         .slide:not(#slide-0) .text-\[9px\],
         .slide:not(#slide-0) .text-\[10px\],
         .slide:not(#slide-0) .text-\[11px\] {
-            font-size: clamp(1.02rem, 1.45vw, 1.2rem) !important;
-            line-height: 1.58;
-            letter-spacing: 0.03em;
+            font-size: clamp(0.9rem, 1vw, 1rem) !important;
+            line-height: 1.5;
+            letter-spacing: 0.02em;
         }
 
         .slide:not(#slide-0) .text-lg {
-            font-size: clamp(1.44rem, 2.05vw, 1.68rem) !important;
+            font-size: clamp(1.16rem, 1.45vw, 1.34rem) !important;
         }
 
         .slide:not(#slide-0) .text-base {
-            font-size: clamp(1.12rem, 1.4vw, 1.28rem) !important;
-            line-height: 1.58;
+            font-size: clamp(1rem, 1.16vw, 1.12rem) !important;
+            line-height: 1.54;
         }
 
         .slide:not(#slide-0) .text-xl {
-            font-size: clamp(1.55rem, 2.2vw, 1.9rem) !important;
+            font-size: clamp(1.32rem, 1.85vw, 1.62rem) !important;
         }
 
         /* Slight lift for major display headings during projection */
         .slide:not(#slide-0) .text-4xl {
-            font-size: clamp(2.35rem, 4.3vw, 3.25rem) !important;
+            font-size: clamp(2rem, 3.5vw, 2.7rem) !important;
         }
 
         .slide:not(#slide-0) .text-5xl {
-            font-size: clamp(2.7rem, 5.1vw, 3.9rem) !important;
+            font-size: clamp(2.25rem, 4.2vw, 3.1rem) !important;
         }
 
         .slide:not(#slide-0) .text-6xl,
         .slide:not(#slide-0) .text-7xl {
-            font-size: clamp(3rem, 6.2vw, 4.9rem) !important;
+            font-size: clamp(2.6rem, 5.3vw, 4rem) !important;
+        }
+
+        .slide:not(#slide-0) .glass-card {
+            border-radius: 1.65rem;
+            padding: clamp(1.35rem, 2.2vw, 2rem);
         }
 
         .slide:not(#slide-0) > div {
@@ -225,28 +230,30 @@
             color: var(--text);
             opacity: 1 !important;
             text-shadow: 0 2px 14px rgba(0, 0, 0, 0.3);
-            letter-spacing: 0.06em;
-            margin-bottom: 1.1rem !important;
+            font-size: clamp(1.7rem, 2.8vw, 2.7rem);
+            letter-spacing: 0.03em;
+            margin-bottom: 0.9rem !important;
             text-wrap: balance;
-            max-width: 18ch;
+            max-width: 20ch;
             margin-left: auto;
             margin-right: auto;
         }
 
         .slide:not(#slide-0) h2[class*="text-xs"] {
-            font-size: clamp(0.98rem, 1.15vw, 1.2rem) !important;
-            letter-spacing: 0.2em !important;
-            opacity: 0.86 !important;
+            font-size: clamp(0.8rem, 0.95vw, 0.94rem) !important;
+            letter-spacing: 0.16em !important;
+            opacity: 0.82 !important;
         }
 
         .slide:not(#slide-0) h3,
         .slide:not(#slide-0) h4 {
             text-wrap: balance;
+            line-height: 1.18;
         }
 
         .slide:not(#slide-0) p {
-            max-width: 68ch;
-            line-height: 1.52;
+            max-width: 62ch;
+            line-height: 1.48;
         }
 
         .dark .slide:not(#slide-0) .opacity-20 { opacity: 0.42 !important; }
@@ -288,8 +295,8 @@
         }
 
         .slide:not(#slide-0):not(#slide-1):not(#slide-15) h2[class*="text-xs"] {
-            font-size: clamp(1.06rem, 1.3vw, 1.3rem) !important;
-            letter-spacing: 0.14em !important;
+            font-size: clamp(0.82rem, 1vw, 0.98rem) !important;
+            letter-spacing: 0.15em !important;
         }
 
         /* Keep dense content left-aligned where scanning is faster */
@@ -555,15 +562,15 @@
         }
 
         #slide-7 h2 {
-            font-size: clamp(1.18rem, 1.8vw, 1.55rem) !important;
-            letter-spacing: 0.2em !important;
-            margin-bottom: 1.5rem !important;
+            font-size: clamp(1rem, 1.3vw, 1.2rem) !important;
+            letter-spacing: 0.16em !important;
+            margin-bottom: 1.1rem !important;
         }
 
         #slide-7 > div > p {
-            font-size: clamp(1.2rem, 1.7vw, 1.5rem) !important;
-            line-height: 1.45;
-            max-width: 54rem;
+            font-size: clamp(1.02rem, 1.2vw, 1.2rem) !important;
+            line-height: 1.48;
+            max-width: 58rem;
         }
 
         #slide-7 .grid {
@@ -572,18 +579,18 @@
         }
 
         #slide-7 .grid .glass-card {
-            min-height: 8.1rem;
-            font-size: clamp(1.2rem, 1.85vw, 1.62rem) !important;
-            letter-spacing: 0.08em !important;
+            min-height: 7rem;
+            font-size: clamp(1.12rem, 1.45vw, 1.34rem) !important;
+            letter-spacing: 0.06em !important;
             border-radius: 2rem;
         }
 
         #slide-7 .mt-20 {
-            margin-top: 2.2rem !important;
-            max-width: min(94vw, 68rem) !important;
-            padding: 2rem 2.2rem !important;
-            font-size: clamp(1.38rem, 2.1vw, 1.9rem) !important;
-            line-height: 1.35 !important;
+            margin-top: 2rem !important;
+            max-width: min(94vw, 64rem) !important;
+            padding: 1.55rem 1.7rem !important;
+            font-size: clamp(1.15rem, 1.6vw, 1.4rem) !important;
+            line-height: 1.4 !important;
         }
 
         /* Slide-specific layout fix: professional pyramid slide hierarchy */
@@ -1518,7 +1525,8 @@
             #slide-3 h2 { text-align: center !important; max-width: 100%; }
             #slide-3 > div { gap: 1.4rem !important; }
             #slide-7 .grid .glass-card { min-height: 6.6rem; font-size: clamp(1.05rem, 5.2vw, 1.3rem) !important; }
-            #slide-7 .mt-20 { font-size: clamp(1.08rem, 4.8vw, 1.34rem) !important; padding: 1.35rem 1.2rem !important; }
+            #slide-7 > div > p { font-size: clamp(0.96rem, 4.1vw, 1.08rem) !important; }
+            #slide-7 .mt-20 { font-size: clamp(1rem, 4.2vw, 1.2rem) !important; padding: 1.2rem 1rem !important; }
             #slide-15 #impact-text { font-size: clamp(4.2rem, 20vw, 6.8rem) !important; }
         }
     </style>
