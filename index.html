@@ -194,6 +194,22 @@
             justify-content: space-between;
         }
 
+        #slide-16 {
+            justify-content: flex-start;
+            padding-top: 5.2rem;
+            padding-bottom: 8.5rem;
+            overflow-y: auto;
+        }
+
+        #slide-16 h2 {
+            color: var(--text);
+            opacity: 0.9 !important;
+            font-size: clamp(0.96rem, 1.05vw, 1.08rem) !important;
+            letter-spacing: 0.26em !important;
+            text-shadow: 0 1px 12px rgba(0, 0, 0, 0.22);
+            margin-bottom: 1.25rem !important;
+        }
+
         #slide-16 .doc-compare-card h3 {
             color: #f8fafc;
             font-size: clamp(1.45rem, 1.8vw, 1.75rem);
@@ -634,6 +650,12 @@
         body:not(.dark) #slide-16 .doc-compare-card li,
         body:not(.dark) #slide-16 .doc-compare-card [class*="text-zinc-"] {
             color: #f3f4f6 !important;
+        }
+
+        body:not(.dark) #slide-16 h2 {
+            color: #111827 !important;
+            opacity: 1 !important;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
         }
 
         .checklist-label {
