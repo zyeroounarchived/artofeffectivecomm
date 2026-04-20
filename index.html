@@ -1221,20 +1221,37 @@
 
         /* Final Audit slide readability in light mode */
         body:not(.dark) #slide-13 h2 {
-            color: #111827;
-            text-shadow: 0 2px 8px rgba(255, 255, 255, 0.55);
+            color: #0f172a !important;
+            opacity: 1 !important;
+            text-shadow: none;
         }
 
         body:not(.dark) #slide-13 .glass-card {
-            background: rgba(255, 255, 255, 0.97) !important;
-            border: 1px solid rgba(17, 24, 39, 0.16);
-            box-shadow: 0 20px 44px rgba(0, 0, 0, 0.10);
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(247, 250, 255, 0.96)) !important;
+            border: 1px solid rgba(15, 23, 42, 0.18) !important;
+            box-shadow: 0 22px 52px rgba(15, 23, 42, 0.12) !important;
+        }
+
+        body:not(.dark) #slide-13 > div {
+            max-width: min(92vw, 760px);
+        }
+
+        body:not(.dark)[data-slide="13"] #bg-canvas {
+            opacity: 0.06 !important;
+            filter: contrast(0.82) saturate(0.45) brightness(0.92) blur(1.6px) !important;
+        }
+
+        body:not(.dark) #slide-13 p,
+        body:not(.dark) #slide-13 .meter-value,
+        body:not(.dark) #slide-13 .meter-label,
+        body:not(.dark) #slide-13 .checklist-label {
+            color: #0f172a !important;
+            opacity: 1 !important;
+            text-shadow: none !important;
         }
 
         body:not(.dark) #slide-13 .checklist-label {
-            color: #111827 !important;
-            opacity: 1 !important;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
+            letter-spacing: 0.18em;
         }
 
         body:not(.dark) #slide-13 .check-circle {
@@ -1266,6 +1283,11 @@
 
         body:not(.dark) #slide-13 .audit-meter .meter-fill {
             stroke: #2f7d68;
+        }
+
+        body:not(.dark) #slide-13 .space-y-4 > .glass-card {
+            padding: 1.1rem 1.2rem !important;
+            gap: 1rem !important;
         }
 
         body:not(.dark) #slide-13 #unlock-msg {
