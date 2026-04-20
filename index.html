@@ -542,6 +542,14 @@
             letter-spacing: -0.03em !important;
         }
 
+        #slide-15 #impact-text {
+            font-size: clamp(8.6rem, 24vw, 21rem) !important;
+            line-height: 0.78 !important;
+            letter-spacing: -0.04em !important;
+            max-width: none !important;
+            text-wrap: nowrap;
+        }
+
         /* Slide-specific layout fix: professional pyramid slide hierarchy */
         #slide-4 {
             padding-top: 5.4rem;
@@ -1008,7 +1016,28 @@
         body:not(.dark) #slide-5 .glass-card:last-child h4,
         body:not(.dark) #slide-5 .glass-card:last-child ul,
         body:not(.dark) #slide-5 .glass-card:last-child li {
-            color: #f8fafc !important;
+            color: #0f172a !important;
+        }
+
+        body:not(.dark) #slide-5 .glass-card:first-child {
+            background: linear-gradient(160deg, rgba(255, 248, 250, 0.96), rgba(252, 243, 246, 0.94)) !important;
+            border-color: rgba(168, 134, 142, 0.34) !important;
+        }
+
+        body:not(.dark) #slide-5 .glass-card:last-child {
+            background: linear-gradient(160deg, rgba(246, 255, 252, 0.96), rgba(238, 251, 247, 0.94)) !important;
+            border-color: rgba(109, 145, 133, 0.34) !important;
+        }
+
+        body:not(.dark) #slide-5 .glass-card:last-child ul,
+        body:not(.dark) #slide-5 .glass-card:last-child li,
+        body:not(.dark) #slide-5 .glass-card:last-child p {
+            color: #1e293b !important;
+            opacity: 1 !important;
+        }
+
+        body:not(.dark) #slide-5 .glass-card:last-child .w-2.h-2.rounded-full.bg-emerald-500 {
+            background-color: #5b8d7e !important;
         }
 
         body:not(.dark) #slide-16 .doc-compare-card h3,
@@ -1016,7 +1045,34 @@
         body:not(.dark) #slide-16 .doc-compare-card ul,
         body:not(.dark) #slide-16 .doc-compare-card li,
         body:not(.dark) #slide-16 .doc-compare-card [class*="text-zinc-"] {
-            color: #f3f4f6 !important;
+            color: #1e293b !important;
+            opacity: 1 !important;
+        }
+
+        body:not(.dark) #slide-16 .doc-compare-bad {
+            background: linear-gradient(165deg, rgba(255, 246, 249, 0.97), rgba(250, 240, 245, 0.94)) !important;
+            border-color: rgba(168, 134, 142, 0.34) !important;
+        }
+
+        body:not(.dark) #slide-16 .doc-compare-good {
+            background: linear-gradient(165deg, rgba(245, 255, 251, 0.97), rgba(238, 251, 247, 0.94)) !important;
+            border-color: rgba(109, 145, 133, 0.34) !important;
+        }
+
+        body:not(.dark) #slide-16 .doc-compare-card p.text-\[10px\] {
+            color: #475569 !important;
+        }
+
+        body:not(.dark) #slide-16 .doc-link-btn.bad {
+            color: #7f3248;
+            border-color: rgba(127, 50, 72, 0.35);
+            background: rgba(255, 231, 239, 0.86);
+        }
+
+        body:not(.dark) #slide-16 .doc-link-btn.good {
+            color: #1f5e4b;
+            border-color: rgba(31, 94, 75, 0.34);
+            background: rgba(219, 248, 238, 0.9);
         }
 
         body:not(.dark) #slide-16 h2 {
@@ -1101,6 +1157,14 @@
 
         body:not(.dark) #slide-13 .audit-meter .meter-fill {
             stroke: #2f7d68;
+        }
+
+        body:not(.dark) #slide-13 #unlock-msg {
+            opacity: 0 !important;
+        }
+
+        body:not(.dark) #slide-13 #unlock-msg.show {
+            opacity: 1 !important;
         }
 
         /* AI Lab light-mode cleanup: strong contrast and consistent surface styling */
@@ -2600,7 +2664,8 @@
 
     function unlockPresentation() {
         isUnlocked = true;
-        document.getElementById('unlock-msg').style.opacity = "1";
+        const unlockMsg = document.getElementById('unlock-msg');
+        if (unlockMsg) unlockMsg.classList.add('show');
         const overlay = document.getElementById('team-lock-overlay');
         if (overlay) { overlay.style.opacity = "0"; setTimeout(() => overlay.style.display = "none", 500); }
         document.querySelectorAll('.dock-item.locked').forEach(item => item.classList.remove('locked'));
