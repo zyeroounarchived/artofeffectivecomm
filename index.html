@@ -136,7 +136,7 @@
 
 
         .slide:not(#slide-0) {
-            font-size: 1.18rem;
+            font-size: 1.26rem;
         }
 
         .slide:not(#slide-0) .text-xs,
@@ -144,13 +144,59 @@
         .slide:not(#slide-0) .text-\[9px\],
         .slide:not(#slide-0) .text-\[10px\],
         .slide:not(#slide-0) .text-\[11px\] {
-            font-size: clamp(0.92rem, 1.3vw, 1.08rem) !important;
-            line-height: 1.5;
+            font-size: clamp(1.02rem, 1.45vw, 1.2rem) !important;
+            line-height: 1.58;
             letter-spacing: 0.03em;
         }
 
         .slide:not(#slide-0) .text-lg {
-            font-size: clamp(1.34rem, 1.9vw, 1.52rem) !important;
+            font-size: clamp(1.44rem, 2.05vw, 1.68rem) !important;
+        }
+
+        .slide:not(#slide-0) .text-base {
+            font-size: clamp(1.12rem, 1.4vw, 1.28rem) !important;
+            line-height: 1.58;
+        }
+
+        .slide:not(#slide-0) .text-xl {
+            font-size: clamp(1.55rem, 2.2vw, 1.9rem) !important;
+        }
+
+        /* Slight lift for major display headings during projection */
+        .slide:not(#slide-0) .text-4xl {
+            font-size: clamp(2.35rem, 4.3vw, 3.25rem) !important;
+        }
+
+        .slide:not(#slide-0) .text-5xl {
+            font-size: clamp(2.7rem, 5.1vw, 3.9rem) !important;
+        }
+
+        .slide:not(#slide-0) .text-6xl,
+        .slide:not(#slide-0) .text-7xl {
+            font-size: clamp(3rem, 6.2vw, 4.9rem) !important;
+        }
+
+        .slide:not(#slide-0) > div {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .slide:not(#slide-0) h2,
+        .slide:not(#slide-0) h3,
+        .slide:not(#slide-0) h4,
+        .slide:not(#slide-0) p,
+        .slide:not(#slide-0) [class*="text-left"] {
+            text-align: center !important;
+        }
+
+        /* Keep dense content left-aligned where scanning is faster */
+        #slide-5 ul,
+        #slide-10 .glass-card div,
+        #slide-13 .glass-card,
+        #slide-16 .doc-compare-card,
+        #slide-16 .doc-compare-card ul,
+        #slide-16 .doc-compare-card li {
+            text-align: left !important;
         }
 
         /* Readability tuning for dense comparison slides */
@@ -922,18 +968,22 @@
 <div class="slide" id="slide-1">
     <div class="max-w-5xl w-full text-center">
         <h2 class="text-xs font-black tracking-[0.6em] uppercase opacity-30 mb-16 italic">The Methodology: How?</h2>
+        <p class="text-sm opacity-70 max-w-3xl mx-auto mb-10">This framework turns long documents into action-ready communication for faster decisions.</p>
         <div class="grid md:grid-cols-3 gap-8">
             <div class="glass-card border-t-2 border-zinc-700">
                 <h3 class="text-sm font-black mb-6 uppercase tracking-widest">Logic Clusters</h3>
                 <p class="text-[11px] opacity-60 leading-relaxed font-medium">Organize thoughts using MECE to eliminate overlaps and logical gaps before writing.</p>
+                <p class="text-[10px] opacity-55 mt-4">Outcome: cleaner sections with fewer reviewer comments.</p>
             </div>
             <div class="glass-card border-t-2 border-zinc-700">
                 <h3 class="text-sm font-black mb-6 uppercase tracking-widest">Inverted Stacks</h3>
                 <p class="text-[11px] opacity-60 leading-relaxed font-medium">Lead with the conclusion. Respect reader time by ranking findings by impact.</p>
+                <p class="text-[10px] opacity-55 mt-4">Outcome: leadership understands the ask in under one minute.</p>
             </div>
             <div class="glass-card border-t-2 border-zinc-700">
                 <h3 class="text-sm font-black mb-6 uppercase tracking-widest">Visual GPS</h3>
                 <p class="text-[11px] opacity-60 leading-relaxed font-medium">Engineer for scannability. Use white space and signposting as visual roadmaps.</p>
+                <p class="text-[10px] opacity-55 mt-4">Outcome: faster scanning without missing critical points.</p>
             </div>
         </div>
     </div>
@@ -942,9 +992,9 @@
 <div class="slide" id="slide-2">
     <div class="max-w-4xl w-full grid md:grid-cols-3 gap-8 text-center">
         <h2 class="col-span-full text-xs font-black uppercase tracking-[0.5em] opacity-30 mb-12">The Economic Reality</h2>
-        <div><span class="text-7xl font-black block">23h</span><p class="text-zinc-500 uppercase text-[9px] font-black mt-8">Weekly Reading Waste</p></div>
-        <div><span class="text-7xl font-black block">67%</span><p class="text-zinc-500 uppercase text-[9px] font-black mt-8">Executive Friction</p></div>
-        <div><span class="text-7xl font-black block text-emerald-500">LOST</span><p class="text-zinc-500 uppercase text-[9px] font-black mt-8">Project Momentum</p></div>
+        <div><span class="text-7xl font-black block">23h</span><p class="text-zinc-500 uppercase text-[9px] font-black mt-8">Weekly Reading Waste</p><p class="text-[10px] opacity-60 mt-3">Time spent decoding unclear reports.</p></div>
+        <div><span class="text-7xl font-black block">67%</span><p class="text-zinc-500 uppercase text-[9px] font-black mt-8">Executive Friction</p><p class="text-[10px] opacity-60 mt-3">Misalignment before decisions are made.</p></div>
+        <div><span class="text-7xl font-black block text-emerald-500">LOST</span><p class="text-zinc-500 uppercase text-[9px] font-black mt-8">Project Momentum</p><p class="text-[10px] opacity-60 mt-3">Delays caused by weak document structure.</p></div>
     </div>
 </div>
 
@@ -955,10 +1005,12 @@
             <div class="glass-card border-l-4 border-zinc-700 shadow-xl">
                 <h4 class="font-black text-[9px] tracking-widest uppercase opacity-40 mb-3">Goal Identification</h4>
                 <p class="text-base font-bold leading-tight">Define Action: Inform, Persuade, or Request?</p>
+                <p class="text-[10px] opacity-60 mt-3">Every section should serve one clear communication goal.</p>
             </div>
             <div class="glass-card border-l-4 border-zinc-700 shadow-xl">
                 <h4 class="font-black text-[9px] tracking-widest uppercase opacity-40 mb-3">Context Mapping</h4>
                 <p class="text-base font-bold leading-tight">Who is reading? CEO needs bottom line; peer needs details.</p>
+                <p class="text-[10px] opacity-60 mt-3">Depth changes by audience, but clarity standards stay constant.</p>
             </div>
         </div>
     </div>
@@ -967,6 +1019,7 @@
 <div class="slide" id="slide-4">
     <div class="max-w-4xl text-center flex flex-col items-center">
         <h2 class="text-xs font-black uppercase opacity-30 mb-20">The Pyramid Principle</h2>
+        <p class="text-sm opacity-65 max-w-2xl mb-10">Start with the answer, then support it with grouped arguments and evidence.</p>
         <div class="w-full max-w-sm glass-card mb-8 border-b-8 border-zinc-700 shadow-2xl hover:scale-105 transition-transform"><h3 class="text-2xl font-black uppercase tracking-widest">THE ANSWER</h3></div>
         <div class="grid grid-cols-2 gap-4 w-full max-w-2xl opacity-80 font-black text-[10px] uppercase text-center">
             <div class="glass-card bg-black/40 border-white/10">Logical Arguments</div>
@@ -1011,10 +1064,12 @@
         <div class="glass-card border-t-4 border-zinc-700 shadow-2xl">
             <h3 class="text-lg font-black uppercase mb-6">No Overlaps</h3>
             <p class="text-[11px] opacity-70 italic leading-relaxed font-bold">Arguments stand alone. Repetition indicates broken logic.</p>
+            <p class="text-[10px] opacity-55 mt-4">Each section must add a new decision-relevant point.</p>
         </div>
         <div class="glass-card border-t-4 border-zinc-700 shadow-2xl">
             <h3 class="text-lg font-black uppercase mb-6">No Gaps</h3>
             <p class="text-[11px] opacity-70 italic leading-relaxed font-bold">Logic covers 100% of scope. No missing info.</p>
+            <p class="text-[10px] opacity-55 mt-4">Check if a skeptical reviewer can challenge missing elements.</p>
         </div>
     </div>
 </div>
@@ -1022,6 +1077,7 @@
 <div class="slide" id="slide-7">
     <div class="max-w-4xl text-center">
         <h2 class="text-xs font-black uppercase opacity-30 mb-20 tracking-widest">The Flow GPS</h2>
+        <p class="text-sm opacity-65 max-w-2xl mx-auto mb-8">Guide the reader from context to conclusion with predictable structure.</p>
         <div class="grid grid-cols-3 gap-6 text-center">
             <div class="glass-card p-6 uppercase font-black text-[10px] bg-black/70 text-white border-white/20 tracking-widest">Expectation</div>
             <div class="glass-card p-6 uppercase font-black text-[10px] bg-black/70 text-white border-white/20 tracking-widest">Navigation</div>
@@ -1038,6 +1094,7 @@
             <div class="glass-card border-t border-white/20 uppercase bg-black/30">White Space</div>
             <div class="glass-card border-t border-white/20 uppercase text-emerald-400 bg-black/30 shadow-lg font-bold">Bold Takeaways</div>
         </div>
+        <p class="md:col-span-2 text-sm opacity-65 max-w-3xl mx-auto mt-2">Good visual hierarchy reduces cognitive load and improves retention in reviews.</p>
     </div>
 </div>
 
@@ -1049,12 +1106,14 @@
             <div class="w-16 h-px bg-zinc-800 mx-auto opacity-30"></div>
             <div class="text-4xl font-black tracking-tighter uppercase text-emerald-400 drop-shadow-2xl">"Our market share is declining."</div>
         </div>
+        <p class="text-sm opacity-65 mt-10">If a sentence hides the decision, rewrite it until action is obvious.</p>
     </div>
 </div>
 
 <div class="slide" id="slide-10">
     <div class="max-w-4xl w-full flex flex-col gap-6 overflow-y-auto max-h-[75vh] py-8">
         <h2 class="text-xs font-black tracking-[0.6em] uppercase opacity-30 text-center mb-6">Critical Pitfalls</h2>
+        <p class="text-sm opacity-65 text-center max-w-2xl mx-auto mb-2">Avoid these patterns to protect clarity and decision speed.</p>
         <div class="glass-card border-l-4 border-rose-500/50 flex items-center gap-10 shadow-xl">
             <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center bg-rose-500/10 rounded-xl shadow-inner"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg></div>
             <div><h4 class="text-lg font-black uppercase mb-1 text-rose-400">Burying the Lead</h4><p class="text-xs font-medium opacity-70 mt-1">Findings at the end force reader struggle. Dropout is immediate.</p></div>
@@ -1069,6 +1128,7 @@
 <div class="slide" id="slide-11">
     <div class="max-w-2xl w-full">
         <h2 class="text-xs font-black tracking-[0.6em] uppercase opacity-30 text-center mb-8"> AI Architecture Lab</h2>
+        <p class="text-sm opacity-65 text-center max-w-xl mx-auto mb-5">Paste a draft and let AI help restructure it with a decision-first format.</p>
         <div class="glass-card border-t-2 border-white/20 shadow-2xl">
             <textarea id="ai-input" class="ai-input font-bold" placeholder="Paste messy text here..."></textarea>
             <div class="flex justify-between items-center mt-6">
@@ -1083,6 +1143,7 @@
 <div class="slide" id="slide-12">
     <div class="max-w-3xl w-full px-8">
         <h2 class="text-xs font-black tracking-[0.6em] uppercase opacity-30 text-center mb-8">Audience Pulse</h2>
+        <p class="text-sm opacity-65 text-center max-w-2xl mx-auto mb-5">Quick live signal: which clarity practice matters most to your audience?</p>
         <div class="glass-card border-t-2 border-white/20 shadow-2xl">
             <p class="text-sm font-black tracking-widest uppercase text-center mb-8">What improves document clarity most?</p>
             <div class="space-y-4" id="poll-options">
@@ -1118,6 +1179,7 @@
 <div class="slide" id="slide-13">
     <div class="max-w-2xl w-full flex flex-col items-center">
         <h2 class="text-4xl font-black mb-12 text-center uppercase tracking-[0.2em]">Final Audit</h2>
+        <p class="text-sm opacity-65 text-center max-w-xl mb-6">Use this checklist before sending any strategy memo or recommendation note.</p>
         <div class="audit-meter" aria-label="Structure score meter">
             <svg viewBox="0 0 120 120" role="img">
                 <circle class="meter-bg" cx="60" cy="60" r="45"></circle>
