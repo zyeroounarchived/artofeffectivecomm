@@ -9,7 +9,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #ffffff;
@@ -17,6 +17,8 @@
             --muted: #71717a;
             --card-bg: rgba(255, 255, 255, 0.7);
             --nav-bg: rgba(255, 255, 255, 0.9);
+            --surface-border: rgba(132, 145, 165, 0.26);
+            --surface-shadow: 0 22px 60px rgba(5, 8, 18, 0.12);
             --accent-gold: #c5a059;
             --accent-nabhya: #71717a; 
             --accent-green: #7ea99a;
@@ -34,6 +36,8 @@
             --muted: #a1a1aa;
             --card-bg: rgba(15, 15, 15, 0.85);
             --nav-bg: rgba(10, 10, 10, 0.95);
+            --surface-border: rgba(197, 213, 234, 0.2);
+            --surface-shadow: 0 24px 74px rgba(0, 0, 0, 0.5);
             --accent-green: #9cb9b1;
             --accent-emerald-fg: #a9c4bd;
             --accent-emerald-border: rgba(169, 196, 189, 0.30);
@@ -44,7 +48,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg);
             color: var(--text);
             transition: background-color 0.8s ease, color 0.8s ease;
@@ -53,6 +57,17 @@
             user-select: none;
             width: 100vw;
             height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background:
+                radial-gradient(1200px 700px at 15% -10%, rgba(127, 156, 190, 0.12), rgba(0, 0, 0, 0) 56%),
+                radial-gradient(1200px 700px at 90% 110%, rgba(91, 131, 114, 0.12), rgba(0, 0, 0, 0) 58%);
         }
 
         /* TYPOGRAPHIC LOCKUP */
@@ -158,6 +173,9 @@
             backdrop-filter: blur(26px);
             -webkit-backdrop-filter: blur(26px);
             min-height: 25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         #slide-16 .doc-compare-bad {
@@ -184,6 +202,7 @@
             text-decoration: none;
             border: 1px solid rgba(255, 255, 255, 0.24);
             transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease;
+            width: fit-content;
         }
 
         #slide-16 .doc-link-btn:hover {
@@ -203,6 +222,20 @@
             background: rgba(18, 58, 46, 0.5);
         }
 
+        #slide-16 .verdict-card {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-left-width: 0 !important;
+            border-top: 1px solid var(--surface-border);
+        }
+
+        #slide-16 .verdict-card p {
+            max-width: 52rem;
+        }
+
         #bg-canvas {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 0; pointer-events: none; display: block;
@@ -213,16 +246,16 @@
         }
 
         .glass-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(40px);
-            -webkit-backdrop-filter: blur(40px);
-            border: 1px solid rgba(128, 128, 128, 0.2);
+            background: linear-gradient(145deg, color-mix(in srgb, var(--card-bg) 92%, #0f172a 8%), color-mix(in srgb, var(--card-bg) 98%, #000000 2%));
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border: 1px solid var(--surface-border);
             border-radius: 2rem;
             transition: all 0.4s ease;
             max-width: 850px;
             width: 100%;
             padding: 2.5rem;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            box-shadow: var(--surface-shadow);
         }
 
         /* NAVIGATION DOCK */
@@ -230,7 +263,7 @@
             position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
             z-index: 1000; display: flex; align-items: flex-end; gap: 8px; padding: 10px;
             background: var(--nav-bg); border-radius: 28px; backdrop-filter: blur(25px);
-            border: 1px solid rgba(128, 128, 128, 0.2); box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+            border: 1px solid var(--surface-border); box-shadow: 0 30px 84px rgba(0,0,0,0.3);
             max-width: 96vw; overflow-x: auto;
         }
 
@@ -512,7 +545,7 @@
         body:not(.dark) .glass-card {
             background: rgba(255, 255, 255, 0.9);
             border-color: rgba(0, 0, 0, 0.12);
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.09);
         }
 
         body:not(.dark) [class*="bg-black/"] {
@@ -1058,7 +1091,7 @@
             </div>
         </div>
 
-        <div class="glass-card mt-8 border-l-4 border-zinc-700 shadow-2xl">
+        <div class="glass-card verdict-card mt-8 border-l-4 border-zinc-700 shadow-2xl">
             <h4 class="text-[10px] font-black uppercase tracking-[0.35em] opacity-60 mb-4">At-a-Glance Verdict</h4>
             <p class="text-base md:text-lg font-black leading-relaxed">The good document communicates decisions faster and reduces reader confusion.</p>
             <p class="text-sm opacity-80 mt-4">Use this slide to show how structure quality directly affects execution speed.</p>
