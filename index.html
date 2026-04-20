@@ -974,6 +974,15 @@
             text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
         }
 
+        /* Override high-specificity dark card rule on content slides in light mode */
+        body:not(.dark) .slide:not(#slide-0):not(#slide-1):not(#slide-15) .glass-card {
+            background: linear-gradient(155deg, rgba(255, 255, 255, 0.95), rgba(246, 249, 255, 0.92)) !important;
+            border: 1px solid rgba(15, 23, 42, 0.16) !important;
+            box-shadow: 0 20px 46px rgba(15, 23, 42, 0.1) !important;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
         /* Global light-mode readability lock for body copy and small labels */
         body:not(.dark) .slide:not(#slide-0):not(#slide-1):not(#slide-15) h3,
         body:not(.dark) .slide:not(#slide-0):not(#slide-1):not(#slide-15) h4 {
@@ -1141,6 +1150,31 @@
             opacity: 0.95;
         }
 
+        /* Poll slide light-mode cleanup */
+        body:not(.dark) #slide-12 h2,
+        body:not(.dark) #slide-12 p,
+        body:not(.dark) #slide-12 span,
+        body:not(.dark) #slide-12 #poll-status,
+        body:not(.dark) #slide-12 #poll-total,
+        body:not(.dark) #slide-12 #poll-remaining {
+            color: #0f172a !important;
+            opacity: 1 !important;
+            text-shadow: none !important;
+        }
+
+        body:not(.dark) #slide-12 .poll-card {
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.82), rgba(247, 250, 255, 0.78)) !important;
+            border-color: rgba(15, 23, 42, 0.16) !important;
+        }
+
+        body:not(.dark) #slide-12 .poll-bar {
+            background: rgba(15, 23, 42, 0.14) !important;
+        }
+
+        body:not(.dark) #slide-12 .poll-fill {
+            background: linear-gradient(90deg, #6d9185, #8fb5a8) !important;
+        }
+
         body:not(.dark) #slide-11.slide.active::before {
             opacity: 1;
             background:
@@ -1174,6 +1208,55 @@
             opacity: 1 !important;
             text-shadow: none !important;
             box-shadow: 0 22px 52px rgba(15, 23, 42, 0.12);
+        }
+
+        /* Emergency light-mode readability lock (must stay near end so it wins) */
+        body:not(.dark)[data-slide="2"] #bg-canvas,
+        body:not(.dark)[data-slide="4"] #bg-canvas,
+        body:not(.dark)[data-slide="7"] #bg-canvas,
+        body:not(.dark)[data-slide="8"] #bg-canvas {
+            opacity: 0.1 !important;
+            filter: contrast(0.84) saturate(0.54) brightness(0.84) blur(1.2px) !important;
+        }
+
+        body:not(.dark) #slide-2 p,
+        body:not(.dark) #slide-4 p,
+        body:not(.dark) #slide-7 p,
+        body:not(.dark) #slide-8 p,
+        body:not(.dark) #slide-2 [class*="text-zinc-"],
+        body:not(.dark) #slide-4 [class*="text-zinc-"],
+        body:not(.dark) #slide-7 [class*="text-zinc-"],
+        body:not(.dark) #slide-8 [class*="text-zinc-"] {
+            color: #0f172a !important;
+            opacity: 1 !important;
+            text-shadow: none !important;
+        }
+
+        body:not(.dark) #slide-2 .opacity-20,
+        body:not(.dark) #slide-2 .opacity-30,
+        body:not(.dark) #slide-2 .opacity-40,
+        body:not(.dark) #slide-2 .opacity-50,
+        body:not(.dark) #slide-2 .opacity-60,
+        body:not(.dark) #slide-2 .opacity-70,
+        body:not(.dark) #slide-4 .opacity-20,
+        body:not(.dark) #slide-4 .opacity-30,
+        body:not(.dark) #slide-4 .opacity-40,
+        body:not(.dark) #slide-4 .opacity-50,
+        body:not(.dark) #slide-4 .opacity-60,
+        body:not(.dark) #slide-4 .opacity-70,
+        body:not(.dark) #slide-7 .opacity-20,
+        body:not(.dark) #slide-7 .opacity-30,
+        body:not(.dark) #slide-7 .opacity-40,
+        body:not(.dark) #slide-7 .opacity-50,
+        body:not(.dark) #slide-7 .opacity-60,
+        body:not(.dark) #slide-7 .opacity-70,
+        body:not(.dark) #slide-8 .opacity-20,
+        body:not(.dark) #slide-8 .opacity-30,
+        body:not(.dark) #slide-8 .opacity-40,
+        body:not(.dark) #slide-8 .opacity-50,
+        body:not(.dark) #slide-8 .opacity-60,
+        body:not(.dark) #slide-8 .opacity-70 {
+            opacity: 1 !important;
         }
 
         body.retro-mode {
